@@ -5,11 +5,11 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
 		
         {% block stylesheets %}
-		<link rel="stylesheet" type="text/css" href="{{ asset('build/style.css') }}">		
+			{{ encore_entry_link_tags('style') }}
 		{% endblock %}
 		
         {% block javascript %}
-		<script type="text/javascript" src="{{ asset('build/script.js') }}"></script>
+			{{ encore_entry_script_tags('script') }}
 		{% endblock %}
     </head>
     <body>
