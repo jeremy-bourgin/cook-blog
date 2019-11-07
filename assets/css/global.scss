@@ -4,7 +4,9 @@
 	font-size: 1rem;
 }
 
+$body-bg: #CCC;
+
 @import "~bootstrap/scss/bootstrap";
 
-@import './test.scss';
+@import "./test.scss";
 
