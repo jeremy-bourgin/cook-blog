@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Block
  * @ORM\Entity
  * @ORM\Table(
- *	name="block",
+ *	name="cblog_block",
  *	uniqueConstraints={
  *	 @ORM\UniqueConstraint(name="UC_BLOCK_ROUTE_ORDER",columns={"route", "order"})
  *	}
@@ -61,4 +61,54 @@ class Block extends Content
 	{
 		return TEMPLATE_FILE;
 	}
+
+    public function getRoute(): ?string
+    {
+        return $this->route;
+    }
+
+    public function setRoute(string $route): self
+    {
+        $this->route = $route;
+
+        return $this;
+    }
+
+    public function getOrder(): ?string
+    {
+        return $this->order;
+    }
+
+    public function setOrder(string $order): self
+    {
+        $this->order = $order;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Content[]
+     */
+    public function getBlocks(): Collection
+    {
+        return $this->blocks;
+    }
+
+    public function addBlock(Content $block): self
+    {
+        if (!$this->blocks->contains($block)) {
+            $this->blocks[] = $block;
+        }
+
+        return $this;
+    }
+
+    public function removeBlock(Content $block): self
+    {
+        if ($this->blocks->contains($block)) {
+            $this->blocks->removeElement($block);
+        }
+
+        return $this;
+    }
 }

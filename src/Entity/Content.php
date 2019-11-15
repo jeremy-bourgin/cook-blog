@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Content
  *
- * @ORM\Table(name="content")
+ * @ORM\Table(name="cblog_content")
  * @ORM\Entity
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="content_type", type="bigint")
@@ -24,6 +24,11 @@ abstract class Content
 	private $id;
 	
 	public abstract function getTemplateFile(): string;
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
 	
 	
 }

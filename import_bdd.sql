@@ -1,0 +1,72 @@
+-- this file is generated thanks to the following command :
+-- php bin/console doctrine:schema:create --dump-sql > import_bdd.sql
+
+-- BEGIN
+-- CREATE part
+CREATE TABLE cblog_content (
+	id BIGINT AUTO_INCREMENT NOT NULL,
+	content_type BIGINT NOT NULL, PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
+CREATE TABLE cblog_article (
+	id BIGINT NOT NULL,
+	id_user BIGINT DEFAULT NULL,
+	content LONGTEXT NOT NULL,
+	time BIGINT NOT NULL,
+	INDEX IDX_ARTICLE_USER_ID (id_user),
+	PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
+CREATE TABLE cblog_block (
+	id BIGINT NOT NULL,
+	route VARCHAR(255) NOT NULL,
+	`order` BIGINT NOT NULL,
+	UNIQUE INDEX UC_BLOCK_ROUTE_ORDER (route, `order`),
+	PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
+CREATE TABLE block_assignment (
+	id_block BIGINT NOT NULL,
+	id_content BIGINT NOT NULL,
+	INDEX IDX_5D284FD16D9ED612 (id_block),
+	INDEX IDX_5D284FD1205899D9 (id_content),
+	PRIMARY KEY(id_block, id_content)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
+CREATE TABLE cblog_comment (
+	id BIGINT AUTO_INCREMENT NOT NULL,
+	id_article BIGINT DEFAULT NULL,
+	message LONGTEXT NOT NULL,
+	name VARCHAR(20) NOT NULL,
+	time BIGINT NOT NULL,
+	INDEX IDX_COMMENT_ARTICLE_ID (id_article),
+	PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
+CREATE TABLE cblog_page (
+	id BIGINT NOT NULL,
+	content LONGTEXT NOT NULL,
+	PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
+CREATE TABLE cblog_user (
+	id BIGINT AUTO_INCREMENT NOT NULL,
+	email VARCHAR(320) NOT NULL,
+	username VARCHAR(20) NOT NULL,
+	password VARCHAR(60) NOT NULL,
+	UNIQUE INDEX UC_USER_EMAIL (email),
+	UNIQUE INDEX UC_USER_USERNAME (username),
+	UNIQUE INDEX UC_USER_PASSWORD (password),
+	PRIMARY KEY(id)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB;
+
+-- FOREIGN KEY part
+ALTER TABLE cblog_article ADD CONSTRAINT FK_295485986B3CA4B FOREIGN KEY (id_user) REFERENCES cblog_user (id) ON DELETE SET NULL;
+ALTER TABLE cblog_article ADD CONSTRAINT FK_29548598BF396750 FOREIGN KEY (id) REFERENCES cblog_content (id) ON DELETE CASCADE;
+ALTER TABLE cblog_block ADD CONSTRAINT FK_32CFFD49BF396750 FOREIGN KEY (id) REFERENCES cblog_content (id) ON DELETE CASCADE;
+ALTER TABLE block_assignment ADD CONSTRAINT FK_5D284FD16D9ED612 FOREIGN KEY (id_block) REFERENCES cblog_block (id);
+ALTER TABLE block_assignment ADD CONSTRAINT FK_5D284FD1205899D9 FOREIGN KEY (id_content) REFERENCES cblog_content (id);
+ALTER TABLE cblog_comment ADD CONSTRAINT FK_BF1AD992DCA7A716 FOREIGN KEY (id_article) REFERENCES cblog_article (id) ON DELETE CASCADE;
+ALTER TABLE cblog_page ADD CONSTRAINT FK_CB89F91BBF396750 FOREIGN KEY (id) REFERENCES cblog_content (id) ON DELETE CASCADE;
+
+-- END

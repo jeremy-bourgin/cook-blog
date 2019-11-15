@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Page
  * @ORM\Entity
- * @ORM\Table(name="page")
+ * @ORM\Table(name="cblog_page")
  */
 class Page extends Content
 {
@@ -23,4 +23,16 @@ class Page extends Content
 	{
 		return TEMPLATE_FILE;
 	}
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 }
