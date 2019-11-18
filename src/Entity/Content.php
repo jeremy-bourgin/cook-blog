@@ -23,11 +23,30 @@ abstract class Content
      */
 	private $id;
 	
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=100, nullable=false)
+     */
+	private $title;
+	
 	public abstract function getTemplateFile(): string;
 
     public function getId(): ?string
     {
         return $this->id;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
     }
 	
 	
