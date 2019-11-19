@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @ORM\Entity
  */
-class Comment
+class CommentEntity
 {
     /**
      * @var int
@@ -49,7 +49,7 @@ class Comment
     /**
      * @var \Article
      *
-     * @ORM\ManyToOne(targetEntity="Article", inversedBy="comments")
+     * @ORM\ManyToOne(targetEntity="ArticleEntity", inversedBy="comments")
      * @ORM\JoinColumn(name="id_article", referencedColumnName="id", onDelete="CASCADE")
      */
 	private $article;
