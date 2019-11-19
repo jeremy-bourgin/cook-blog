@@ -4,7 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Comment
+ * CommentEntity
  *
  * @ORM\Table(
  *	name="cblog_comment",
@@ -95,17 +95,17 @@ class CommentEntity
         return $this;
     }
 
-    public function getArticle(): ?Article
+    public function getArticle(): ?ArticleEntity
     {
         return $this->article;
     }
 
-    public function setArticle(?Article $article): self
+    public function setArticle(?ArticleEntity $article): self
     {
         $this->article = $article;
 
         return $this;
     }
-	
-	
+
+
 }

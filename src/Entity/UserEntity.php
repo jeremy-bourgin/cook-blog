@@ -4,7 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * UserEntity
  *
  * @ORM\Table(
  * 	name="cblog_user",
@@ -92,6 +92,6 @@ class UserEntity
 
         return $this;
     }
-	
-	
+
+
 }

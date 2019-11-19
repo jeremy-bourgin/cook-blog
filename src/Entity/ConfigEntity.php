@@ -4,7 +4,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Page
+ * ConfigEntity
+ *
  * @ORM\Entity
  * @ORM\Table(name="cblog_config")
  */
@@ -24,6 +25,23 @@ class ConfigEntity
      * @ORM\Column(name="value", type="text", nullable=false)
      */
 	private $value;
-	
-	
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function getValue(): ?string
+    {
+        return $this->value;
+    }
+
+    public function setValue(string $value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+
 }

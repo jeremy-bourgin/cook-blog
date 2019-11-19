@@ -4,7 +4,8 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Page
+ * PageEntity
+ *
  * @ORM\Entity
  * @ORM\Table(name="cblog_page",
  * 	uniqueConstraints={
