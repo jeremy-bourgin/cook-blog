@@ -68,20 +68,4 @@ class ArticleService
 		
 		return $result;
 	}
-	
-	public function setTitle(ArticleEntity $o, string $title): void
-	{
-		$o->setTitle($title);
-		
-		$this->em->persist($o);
-		$this->em->flush();
-	}
-	
-	public function setContent(ArticleEntity $o, string $content): void
-	{
-		$o->setContent($content);
-		
-		$this->em->persist($o);
-		$this->em->flush();
-	}
 }
