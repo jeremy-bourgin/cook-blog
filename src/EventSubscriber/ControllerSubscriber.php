@@ -39,7 +39,7 @@ class ControllerSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return array(
-            KernelEvents::CONTROLLER => 'onKernelController'
+            KernelEvents::CONTROLLER => "onKernelController"
         );
     }
 
