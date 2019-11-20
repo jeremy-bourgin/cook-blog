@@ -2,70 +2,47 @@
 namespace App\Service;
 
 use App\Entity\ArticleEntity;
-use App\Entity\ArticleNotFoundException;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 
-class ArticleService
-{
-	const LIMIT_PAGE = 10;
-	
-	private $em;
-	private $rep;
-	
+class ArticleService extends AbstractContentService
+{	
 	public function __construct(EntityManagerInterface $em)
 	{
-		$this->em = $em;
-		$this->rep = $this->em->getRepository(ArticleEntity::class);
+		$rep = $this->em->getRepository(ArticleEntity::class);
+		
+		parent::__construct($em, $rep);
 	}
 	
-	private function createGetRequest(bool $with_comments, bool $with_user)
+	protected function join(QueryBuilder $request, bool $with_comments, bool $with_user): void
 	{
-		$request = $this->rep->createQueryBuilder("a");
-		
 		if ($with_comments)
 		{
-			$request->innerJoin("a.comments", "c");
-			$request->addSelect("c");
+			$request->innerJoin("c.comments", "com");
+			$request->addSelect("com");
 		}
 		
 		if ($with_user)
 		{
-			$request->innerJoin("a.user", "u");
+			$request->innerJoin("c.user", "u");
 			$request->addSelect("u");
 		}
+	}
+	
+	protected function createGetUrlRequest(string $url, bool $with_comments = true, bool $with_user = true): QueryBuilder
+	{
+		$request = parent::createGetUrlRequest($url);
+		$this->join($with_comments, $with_user);
+		
+		return $reuqest;
+	}
+	
+	protected function createGetAllFromPageRequest(int $page, bool $with_comments = true, bool $with_user = true): QueryBuilder
+	{
+		$request = parent::createGetAllFromPageRequest($page);
+		$this->join($with_comments, $with_user);
 		
 		return $request;
-	}
-	
-	public function getByUrl(string $url, bool $with_comments = true, bool $with_user = true): ArticleEntity
-	{
-		$request = $this->createGetRequest($with_comments, $with_user);
-		$request->where("a.url = :url");
-		$request->setParameter("url", $url);
-		
-		$query = $request->getQuery();
-		$result = $query->getOneOrNullResult();
-		
-		if ($result === null)
-		{
-			throw new ArticleNotFoundException();
-		}
-		
-		return $result;
-	}
-	
-	public function getAllFromPage(int $page, bool $with_comments = true, bool $with_user = true): array
-	{
-		$from = self::LIMIT_PAGE * $page;
-		
-		$request = $this->createGetRequest($with_comments, $with_user);
-		$request->setFirstResult($from);
-		$request->setMaxResults(self::LIMIT_PAGE);
-		
-		$query = $request->getQuery();
-		$result = $query->getResult();
-		
-		return $result;
 	}
 }

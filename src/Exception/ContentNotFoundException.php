@@ -3,9 +3,9 @@ namespace App\Exception;
 
 use Exception;
 
-class ArticleNotFoundException extends Exception
+class ContentNotFoundException extends Exception
 {
-	const MESSAGE = "L'article que vous souhaitez consulter n'existe pas.";
+	const MESSAGE = "Le contenu que vous souhaitez consulter n'existe pas.";
 	
 	public function __construct()
 	{
