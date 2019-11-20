@@ -19,7 +19,7 @@ class ArticleService
 		$this->rep = $this->em->getRepository(ArticleEntity::class);
 	}
 	
-	private createGetRequest(bool $with_comments, bool $with_user)
+	private function createGetRequest(bool $with_comments, bool $with_user)
 	{
 		$request = $this->rep->createQueryBuilder("a");
 		
