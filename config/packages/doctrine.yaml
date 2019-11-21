@@ -6,7 +6,7 @@ doctrine:
         driver: 'postgresql'
         # server_version: '5.7'
 
-        only needed for MySQL
+        # only needed for MySQL
         # charset: utf8mb4
         # default_table_options:
             # charset: utf8mb4
