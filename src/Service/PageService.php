@@ -9,7 +9,7 @@ class PageService extends AbstractContentService
 {
 	public function __construct(EntityManagerInterface $em)
 	{
-		$rep = $this->em->getRepository(PageEntity::class);
+		$rep = $em->getRepository(PageEntity::class);
 		
 		parent::__construct($em, $rep);
 	}

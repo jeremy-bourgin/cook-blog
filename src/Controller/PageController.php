@@ -13,7 +13,7 @@ class PageController extends AbstractController
 	use ControllerSubscriberTrait;
 	
     /**
-     * @Route("/page/{{url}}", name="page")
+     * @Route("/page/{url}", name="page")
      */
     public function index($url)
     {

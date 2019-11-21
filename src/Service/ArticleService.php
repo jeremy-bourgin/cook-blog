@@ -10,7 +10,7 @@ class ArticleService extends AbstractContentService
 {	
 	public function __construct(EntityManagerInterface $em)
 	{
-		$rep = $this->em->getRepository(ArticleEntity::class);
+		$rep = $em->getRepository(ArticleEntity::class);
 		
 		parent::__construct($em, $rep);
 	}

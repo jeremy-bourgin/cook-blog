@@ -21,14 +21,16 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/article/{{url}}", name="article")
+     * @Route("/article/{url}", name="article")
      */
     public function index(string $url)
     {
-        $article = $this->article_service->getByUrl($url);
+        $article = null;
+        //$article = $this->article_service->getByUrl($url);
 
         return $this->render('article/index.html.twig', array(
             'article' => $article,
+            "controller_name" => "ArticleController"
         ));
     }
 }
