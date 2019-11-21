@@ -1,0 +1,19 @@
+{
+  "entrypoints": {
+    "script": {
+      "js": [
+        "/build/runtime.dca8fcdd.js",
+        "/build/0.87359fec.js",
+        "/build/script.db754894.js"
+      ]
+    },
+    "style": {
+      "js": [
+        "/build/runtime.dca8fcdd.js"
+      ],
+      "css": [
+        "/build/style.10125fec.css"
+      ]
+    }
+  }
+}
