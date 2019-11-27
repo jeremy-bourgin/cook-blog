@@ -1,22 +1,45 @@
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+        
         in_memory: { memory: null }
+    
     firewalls:
+        admin:
+            pattern: '^%admin_path%/'
+            form_login:
+                provider: fos_userbundle
+                login_path: '%admin_path%/fos/login'
+                check_path: '%admin_path%/fos/login_check'
+                csrf_token_generator: security.csrf.token_manager
+            logout:
+                path: '%admin_path%/fos/logout'
+            anonymous: true
+        main:
+            pattern: ^/
+            anonymous: true
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
-            anonymous: true
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
+    # activate different ways to authenticate
+    # https://symfony.com/doc/current/security.html#firewalls-authentication
 
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+    # https://symfony.com/doc/current/security/impersonating_user.html
+    # switch_user: true
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: '^%admin_path%/fos/login$', role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^%admin_path%/fos/resetting', role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: '^%admin_path%/', role: ROLE_ADMIN }

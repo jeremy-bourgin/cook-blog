@@ -1,3 +1,27 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+#> FosUserBundle routes (only admin)
+
+fos_admin_login:
+    defaults:  { _controller: FOSUserBundle:Security:login }
+    path:      '%admin_path%/fos/login'
+
+fos_admin_login_check:
+    defaults:   { _controller: FOSUserBundle:Security:check }
+    path:       '%admin_path%/fos/login_check'
+
+fos_admin_logout:
+    defaults:  { _controller: FOSUserBundle:Security:logout }
+    path:      '%admin_path%/fos/logout'
+
+fos_admin_resetting:
+    resource:   "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix:     '%admin_path%/fos/resetting'
+
+fos_admin_add_user:
+    resource:   "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix:     '%admin_path%/fos/add'
+
+#< FosUserBundle routes (only admin)

@@ -16,7 +16,7 @@ class AdminController extends AbstractController
 	use ControllerSubscriberTrait;
 	
     /**
-     * @Route("/admin", name="admin")
+     * @Route("%admin_path%/", name="cblog_admin")
      */
     public function index()
     {
