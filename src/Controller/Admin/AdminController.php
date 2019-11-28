@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\EventSubscriber\Interfaces\IAdminSubscriber;
 use App\EventSubscriber\Interfaces\IControllerSubscriber;
@@ -14,7 +14,7 @@ class AdminController extends AbstractController
 {
 	use AdminSubscriberTrait;
 	use ControllerSubscriberTrait;
-	
+
     /**
      * @Route("%admin_path%/", name="cblog_admin")
      */

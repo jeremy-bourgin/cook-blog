@@ -1,5 +1,5 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Content;
 
 use App\EventSubscriber\Interfaces\IControllerSubscriber;
 use App\EventSubscriber\Traits\ControllerSubscriberTrait;
@@ -11,7 +11,7 @@ class PageController extends AbstractController
 	implements IControllerSubscriber
 {
 	use ControllerSubscriberTrait;
-	
+
     /**
      * @Route("/page/{url}", name="page")
      */

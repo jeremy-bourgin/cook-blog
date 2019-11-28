@@ -18,21 +18,21 @@ abstract class ContentEntity
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
 	private $id;
-	
+
     /**
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=100, nullable=false)
      */
 	private $url;
-	
+
     /**
      * @var string
      *
      * @ORM\Column(name="title", type="string", length=100, nullable=false)
      */
 	private $title;
-	
+
     /**
      * @var string
      *

@@ -1,20 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello IndexController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Projets/www/cook-blog/src/Controller/IndexController.php'|file_link(0) }}">src/Controller/IndexController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Projets/www/cook-blog/templates/index/index.html.twig'|file_link(0) }}">templates/index/index.html.twig</a></code></li>
-    </ul>
-</div>
+	{% for o in articles %}
+		<article>
+			<header><h1><a href="/article/{{ o.url }}">{{ o.title }}</a></h1></header>
+			<p>{{ o.content|length > content_limit ? o.content|slice(0, content_limit)|raw ~ '...' : o.content|raw }}</p>
+			{% if o.content|length > content_limit %}
+				<a href="/article/{{ o.url }}">Lire la suite</a>
+			{% endif %}
+		</article>
+	{% endfor %}
 {% endblock %}
