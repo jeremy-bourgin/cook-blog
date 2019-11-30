@@ -1,6 +1,6 @@
 fos_user:
     db_driver: orm
-    firewall_name: admin
+    firewall_name: main
     user_class: App\Entity\UserEntity
     from_email:
         address: "jeremy.bourgin@etu.umontpellier.fr"

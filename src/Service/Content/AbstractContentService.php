@@ -1,5 +1,5 @@
 <?php
-namespace App\Service;
+namespace App\Service\Content;
 
 use App\Entity\ContentEntity;
 use App\Exception\ContentNotFoundException;
@@ -74,6 +74,17 @@ abstract class AbstractContentService
 	public function getAllFromPage(int $page): array
 	{
 		$request = $this->createGetAllFromPageRequest($page);
+		
+		$query = $request->getQuery();
+		$result = $query->getResult();
+		
+		return $result;
+	}
+	
+	public function getAll(): array
+	{
+		$request = $this->rep->createQueryBuilder("c");
+		$request->orderBy("id", "DESC");
 		
 		$query = $request->getQuery();
 		$result = $query->getResult();

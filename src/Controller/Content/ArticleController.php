@@ -3,7 +3,7 @@ namespace App\Controller\Content;
 
 use App\EventSubscriber\Interfaces\IControllerSubscriber;
 use App\EventSubscriber\Traits\ControllerSubscriberTrait;
-use App\Service\ArticleService;
+use App\Service\Content\ArticleService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;

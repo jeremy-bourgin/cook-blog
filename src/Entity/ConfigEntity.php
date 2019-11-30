@@ -25,6 +25,21 @@ class ConfigEntity
      * @ORM\Column(name="value", type="text", nullable=false)
      */
 	private $value;
+	
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="full_name", type="string", length=255, nullable=false)
+	 * @ORM\Id
+     */
+	private $full_name;
+	
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=false)
+     */
+	private $description;
 
     public function getName(): ?string
     {
@@ -39,6 +54,23 @@ class ConfigEntity
     public function setValue(string $value): self
     {
         $this->value = $value;
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->full_name;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

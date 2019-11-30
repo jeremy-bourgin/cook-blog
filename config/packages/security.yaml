@@ -14,8 +14,8 @@ security:
         in_memory: { memory: null }
     
     firewalls:
-        admin:
-            pattern: '^%admin_path%/'
+        main:
+            pattern: '^/'
             form_login:
                 provider: fos_userbundle
                 login_path: '%admin_path%/fos/login'
@@ -23,9 +23,6 @@ security:
                 csrf_token_generator: security.csrf.token_manager
             logout:
                 path: '%admin_path%/fos/logout'
-            anonymous: true
-        main:
-            pattern: ^/
             anonymous: true
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

@@ -34,8 +34,13 @@ class UserEntity extends BaseUser
 	protected $id;
 	
 	public function __construct()
-	{
-		parent::__construct();
-		
-	}
+   	{
+   		parent::__construct();
+   		
+   	}
+
+    public function getId(): ?string
+    {
+        return $this->id;
+    }
 }

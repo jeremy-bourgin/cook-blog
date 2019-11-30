@@ -33,7 +33,7 @@ class ConfigService
 		}
 	}
 	
-	private function getConfigEntity(): ConfigEntity
+	public function getConfigEntityByName(string $name): ConfigEntity
 	{
 		if (!array_key_exists($name, $this->map_config))
 		{
@@ -46,6 +46,11 @@ class ConfigService
 		}
 		
 		return $o;
+	}
+	
+	public function getConfigEntities(): array
+	{
+		return $this->config_entity;
 	}
 	
 	public function getConfigValue($name): string
@@ -65,7 +70,7 @@ class ConfigService
 	
 	public function setConfig($name, $value): void
 	{
-		$o = $this->getConfigEntity();
+		$o = $this->getConfigEntity($name);
 		$o->setValue($value);
 		
 		$this->em->persist($o);
