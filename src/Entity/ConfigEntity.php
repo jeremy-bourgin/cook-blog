@@ -1,7 +1,10 @@
 <?php
 namespace App\Entity;
 
+use App\Exception\Config\InvalidConfigException;
+
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ConfigEntity
@@ -11,49 +14,127 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ConfigEntity
 {
+    const BOOL_TYPE = 0;
+    const INT_TYPE = 1;
+    const STRING_TYPE = 2;
+
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=100, nullable=false)
 	 * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      */
 	private $name;
 	
     /**
      * @var string
      *
-     * @ORM\Column(name="value", type="text", nullable=false)
+     * @ORM\Column(name="raw_value", type="text", nullable=false)
      */
-	private $value;
+    private $raw_value;
 	
     /**
      * @var string
      *
      * @ORM\Column(name="full_name", type="string", length=255, nullable=false)
-	 * @ORM\Id
      */
 	private $full_name;
 	
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text", nullable=false)
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
-	private $description;
+    private $description;
+    
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="type", type="integer", nullable=false, options={"default" : 2})
+     * @Assert\LessThanOrEqual(2)
+     */
+    private $type;
+
+    public static function stringToType(string $type_name): int
+    {
+        switch($type_name)
+        {
+            case "bool":
+                $r = self::BOOL_TYPE;
+            break;
+
+            case "int":
+                $r = self::INT_TYPE;
+            break;
+
+            case "string":
+                $r = self::STRING_TYPE;
+            break;
+
+            default:
+                $r = self::STRING_TYPE;
+            break;
+        }
+
+        return $r;
+    }
+
+    public function __construct(string $name)
+    {
+        $this->name = $name;
+        $this->type = self::STRING_TYPE;
+    }
+
+    public function getValue()
+    {
+        $r = $this->raw_value;
+
+        switch($this->type)
+        {
+            case self::BOOL_TYPE:
+                $r = boolval($r);
+            break;
+
+            case self::INT_TYPE:
+                $r = (int) $r;
+            break;
+
+            case self::STRING_TYPE:
+                // it is already string
+            break;
+        }
+
+        return $r;
+    }
+
+    public function setValue(string $value): self
+    {
+        if ($this->type === self::BOOL_TYPE && $raw_value !== "0" && $raw_value !== "1")
+        {
+            throw new InvalidConfigException();
+        }
+        else if ($this->type === self::INT_TYPE && !is_numeric($this->raw_value))
+        {
+            throw new InvalidConfigException();
+        }
+
+        return $this->setRawValue($value);
+    }
 
     public function getName(): ?string
     {
         return $this->name;
     }
 
-    public function getValue(): ?string
+    public function getRawValue(): ?string
     {
-        return $this->value;
+        return $this->raw_value;
     }
 
-    public function setValue(string $value): self
+    public function setRawValue(string $raw_value): self
     {
-        $this->value = $value;
+        $this->raw_value = $raw_value;
 
         return $this;
     }
@@ -63,14 +144,33 @@ class ConfigEntity
         return $this->full_name;
     }
 
+    public function setFullName(string $full_name): self
+    {
+        $this->full_name = $full_name;
+
+        return $this;
+    }
+
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
-    public function setDescription(string $description): self
+    public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getType(): ?int
+    {
+        return $this->type;
+    }
+
+    public function setType(int $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }

@@ -2,7 +2,7 @@
 namespace App\Service;
 
 use App\Entity\ConfigEntity;
-use App\Exception\ConfigNotFoundException;
+use App\Exception\Config\ConfigNotFoundException;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -37,12 +37,12 @@ class ConfigService
 	{
 		if (!array_key_exists($name, $this->map_config))
 		{
-			$o = new ConfigEntity();
-			$o->setName($name);
+			throw new ConfigNotFoundException($name);
 		}
 		else
 		{
-			$o = $this->config_entity[$name];
+			$i = $this->map_config[$name];
+			$o = $this->config_entity[$i];
 		}
 		
 		return $o;
@@ -53,7 +53,7 @@ class ConfigService
 		return $this->config_entity;
 	}
 	
-	public function getConfigValue($name): string
+	public function getConfigValue(string $name): string
 	{
 		if (!array_key_exists($name, $this->all_config))
 		{
@@ -67,13 +67,5 @@ class ConfigService
 	{
 		return $this->all_config;
 	}
-	
-	public function setConfig($name, $value): void
-	{
-		$o = $this->getConfigEntity($name);
-		$o->setValue($value);
-		
-		$this->em->persist($o);
-		$this->em->flush();
-	}
+
 }
