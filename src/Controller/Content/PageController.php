@@ -17,7 +17,7 @@ class PageController extends AbstractController
      */
     public function index($url)
     {
-        return $this->render('page/index.html.twig', [
+        return $this->render('content/page.html.twig', [
             'controller_name' => 'PageController',
         ]);
     }

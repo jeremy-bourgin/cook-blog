@@ -8,9 +8,13 @@
             <tbody>
             {% for o in articles %}
                 <tr>
-                    <td>{{ o.title }}</td>
-                    <td><a href="./article/update/{{ o.id }}" class="btn btn-primary">Modifier</a>
-                    <td><a href="./article/delete/{{ o.id }}" class="btn btn-primary">Supprimer</a>
+                    <td class="w-75">{{ o.title }}</td>
+                    <td class="form-group">
+                        <a href="./article/update/{{ o.id }}" class="form-control btn btn-primary">Modifier</a>
+                    </td>
+                    <td class="form-group">
+                        <a href="./article/delete/{{ o.id }}" class="form-control btn btn-primary">Supprimer</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

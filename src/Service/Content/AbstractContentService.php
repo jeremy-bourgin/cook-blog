@@ -26,6 +26,12 @@ abstract class AbstractContentService
 		$request->setFirstResult(self::LIMIT_PAGE * $page);
 		$request->setMaxResults(self::LIMIT_PAGE);
 	}
+
+	protected function idFilterRequest(QueryBuilder $request, int $id): void
+	{
+		$request->where("c.id = :id");
+		$request->setParameter("id", $id);
+	}
 	
 	protected function urlFilterRequest(QueryBuilder $request, string $url): void
 	{
@@ -40,6 +46,14 @@ abstract class AbstractContentService
 		return $request;
 	}
 	
+	protected function createGetIdRequest(int $id): QueryBuilder
+	{
+		$request = $this->createGetRequest();
+		$this->idFilterRequest($request, $id);
+		
+		return $request;
+	}
+
 	protected function createGetUrlRequest(string $url): QueryBuilder
 	{
 		$request = $this->createGetRequest();
@@ -54,6 +68,21 @@ abstract class AbstractContentService
 		$this->paginedRequest($request, $page);
 		
 		return $request;
+	}
+
+	public function getById(int $id): ContentEntity
+	{
+		$request = $this->createGetIdRequest($id);
+
+		$query = $request->getQuery();
+		$result = $query->getOneOrNullResult();
+		
+		if ($result === null)
+		{
+			throw new ContentNotFoundException();
+		}
+		
+		return $result;
 	}
 	
 	public function getByUrl(string $url): ContentEntity
@@ -84,7 +113,7 @@ abstract class AbstractContentService
 	public function getAll(): array
 	{
 		$request = $this->rep->createQueryBuilder("c");
-		$request->orderBy("id", "DESC");
+		$request->orderBy("c.id", "DESC");
 		
 		$query = $request->getQuery();
 		$result = $query->getResult();

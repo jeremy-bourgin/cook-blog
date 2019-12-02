@@ -52,18 +52,6 @@ class ArticleEntity extends ContentEntity
 		$this->comments = new ArrayCollection();
     }
 
-    public function getTime(): ?string
-    {
-        return $this->time;
-    }
-
-    public function setTime(string $time): self
-    {
-        $this->time = $time;
-
-        return $this;
-    }
-
     public function getUser(): ?UserEntity
     {
         return $this->user;
@@ -103,6 +91,18 @@ class ArticleEntity extends ContentEntity
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTime(): ?string
+    {
+        return $this->time;
+    }
+
+    public function setTime(string $time): self
+    {
+        $this->time = $time;
 
         return $this;
     }

@@ -27,7 +27,7 @@ class ArticleController extends AbstractController
     {
         $article = $this->article_service->getByUrl($url);
 
-        return $this->render('article/index.html.twig', array(
+        return $this->render('content/article.html.twig', array(
             'article' => $article,
         ));
     }

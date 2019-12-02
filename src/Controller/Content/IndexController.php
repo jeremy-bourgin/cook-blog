@@ -30,7 +30,7 @@ class IndexController extends AbstractController
     {
         $articles = $this->article_service->getAllFromPage($offset - 1);
 
-        return $this->render('index/index.html.twig', [
+        return $this->render('content/index.html.twig', [
             "articles" => $articles,
 			"content_limit" => self::CONTENT_LIMIT
         ]);

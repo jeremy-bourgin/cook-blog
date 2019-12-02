@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if is_validate %}
+        <p class="success-text">{{ validate_message }}</p>
+        <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a>
+    {% else %}
+        {{ form(form) }}
+    {% endif %}
+
+{% endblock %}
