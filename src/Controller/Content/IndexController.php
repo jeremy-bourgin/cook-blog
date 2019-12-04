@@ -1,19 +1,14 @@
 <?php
 namespace App\Controller\Content;
 
-use App\EventSubscriber\Interfaces\IControllerSubscriber;
-use App\EventSubscriber\Traits\ControllerSubscriberTrait;
 use App\Service\Content\ArticleService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
-	implements IControllerSubscriber
 {
 	const CONTENT_LIMIT = 50;
-
-	use ControllerSubscriberTrait;
 
     private $article_service;
 
