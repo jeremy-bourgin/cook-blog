@@ -1,7 +1,6 @@
 <?php
 namespace App\EventSubscriber;
 
-use App\EventSubscriber\Interfaces\IControllerSubscriber;
 use App\EventSubscriber\Interfaces\IHasAllPagesSubscriber;
 use App\Service\ConfigService;
 use App\Service\Content\PageService;
@@ -44,11 +43,6 @@ class ControllerSubscriber implements EventSubscriberInterface
 		else
 		{
 			$pages = $this->page_service->getAll();
-		}
-
-		if ($controller instanceof IControllerSubscriber)
-		{
-			$controller->setConfigService($this->config_service);
 		}
 
 		$this->twig->addGlobal("global_config", $this->config_service->getAllConfig());
