@@ -1,0 +1,15 @@
+<table class="table table-striped">
+    <tbody>
+    {% for o in array %}
+        <tr>
+            <td class="w-75">{{ o.title }}</td>
+            <td class="form-group">
+                <a href="./{{ content_type }}/update/{{ o.id }}" class="form-control btn btn-primary">Modifier</a>
+            </td>
+            <td class="form-group">
+                <a href="./{{ content_type }}/delete/{{ o.id }}" class="form-control btn btn-primary">Supprimer</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

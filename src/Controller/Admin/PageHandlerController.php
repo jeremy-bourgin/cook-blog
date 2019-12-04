@@ -1,30 +1,42 @@
 <?php
-
 namespace App\Controller\Admin;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\PageEntity;
+use App\Service\Admin\PageHandlerService;
+use App\Service\Content\PageService;
+
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PageHandlerController extends AbstractController
+class PageHandlerController extends AbstractContentHandlerController
 {
+    private $page_service;
+    private $page_handler_service;
+
+    public function __construct(PageService $page_service, PageHandlerService $page_handler_service)
+    {
+        $this->page_service = $page_service;
+        $this->page_handler_service = $page_handler_service;
+    }
+
     /**
      * @Route("%admin_path%/page/add", name="page_add")
      */
-    public function add()
+    public function add(Request $request)
     {
-        return $this->render('admin/content.html.twig', array(
-            'controller_name' => 'PageAddController',
-        ));
+        $page = new PageEntity();
+
+        return parent::formHandler($request, $this->page_handler_service, $page);
     }
 
     /**
      * @Route("%admin_path%/page/update/{id}", name="page_update")
      */
-    public function update($id)
+    public function update(Request $request, int $id)
     {
-        return $this->render('admin/content.html.twig', array(
-            'controller_name' => 'PageUpdateController',
-        ));
+        $page = $this->page_service->getById($id);
+
+        return parent::formHandler($request, $this->page_handler_service, $page);
     }
 
     /**
@@ -32,8 +44,16 @@ class PageHandlerController extends AbstractController
      */
     public function delete(int $id)
     {
-        return $this->render('admin/delete.html.twig', array(
-            'controller_name' => 'PageDeleteController',
-        ));
+        return parent::deleteHandler($this->page_handler_service, $id);
+    }
+
+    public function getValidateMessage(): string
+    {
+        return "La page a bien été enregistré";
+    }
+
+    public function getDeletedMessage(): string
+    {
+        return "La page a bien été supprimé";
     }
 }

@@ -14,6 +14,7 @@ abstract class AbstractContentHandlerService
 	public function __construct(EntityManagerInterface $em, AbstractContentService $content_service)
 	{
         $this->em = $em;
+        $this->content_service = $content_service;
     }
 
     public function save(ContentEntity $o): void

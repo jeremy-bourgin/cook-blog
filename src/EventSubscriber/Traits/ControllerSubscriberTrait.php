@@ -5,9 +5,9 @@ use App\Service\ConfigService;
 
 trait ControllerSubscriberTrait
 {
-	private $config_service;
+	protected $config_service;
 	
-	public function setConfigService(ConfigService $config_service)
+	public function setConfigService(ConfigService $config_service): void
 	{
 		$this->config_service = $config_service;
 	}

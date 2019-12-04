@@ -11,17 +11,33 @@
 	{% block javascript %}
 		{{ encore_entry_script_tags('script') }}
 	{% endblock %}
+
+	<link rel="icon" href="{{ asset('images/favicon.ico') }}" />
 </head>
 <body>
 <section id="header">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-		<a class="navbar-brand" href="/">Navbar</a>
+		<a class="navbar-brand" href="/"><img src="{{ asset('images/logo.png') }}" height="36px" width="36px" alt="logo"></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<div class="navbar-nav">
 				<a href="/" class="nav-item nav-link">Accueil</a>
+				
+				{% for p in global_pages %}
+					<a href="/page/{{ p.url }}" class="nav-item nav-link">{{ p.title }}</a>
+				{% endfor %}
+
+				<a href="/contact" class="nav-item nav-link">Contact</a>
+
+				{% if is_granted('ROLE_ADMIN') %}
+					<a href="{{ path('cblog_admin') }}" class="nav-item nav-link">Panel admin</a>
+				{% endif %}
+
+				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+					<a href="{{ path('fos_admin_logout') }}" class="nav-item nav-link">Déconnexion</a>
+				{% endif %}
 			</div>
 		</div>
 	</nav>

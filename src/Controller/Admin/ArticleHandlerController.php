@@ -2,11 +2,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ArticleEntity;
-use App\Form\ContentForm;
 use App\Service\Admin\ArticleHandlerService;
 use App\Service\Content\ArticleService;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -48,8 +46,16 @@ class ArticleHandlerController extends AbstractContentHandlerController
      */
     public function delete(int $id)
     {
-        return $this->render('admin/delete.html.twig', array(
-            'controller_name' => 'ArticleDeleteController',
-        ));
+        return parent::deleteHandler($this->article_handler_service, $id);
+    }
+
+    public function getValidateMessage(): string
+    {
+        return "L'article a bien été enregistré";
+    }
+
+    public function getDeletedMessage(): string
+    {
+        return "L'article a bien été supprimé";
     }
 }

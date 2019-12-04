@@ -4,20 +4,12 @@
     <artcile>
         <header><h1>Gestion des articles</h1></header>
         <aside><a href="./article/add" class="btn btn-primary">Créer un article</a></aside>
-        <table class="table table-striped">
-            <tbody>
-            {% for o in articles %}
-                <tr>
-                    <td class="w-75">{{ o.title }}</td>
-                    <td class="form-group">
-                        <a href="./article/update/{{ o.id }}" class="form-control btn btn-primary">Modifier</a>
-                    </td>
-                    <td class="form-group">
-                        <a href="./article/delete/{{ o.id }}" class="form-control btn btn-primary">Supprimer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        {% include 'includes/content_handler.html.twig' with {'array': articles, 'content_type': 'article'} %}
+    </article>
+
+    <artcile>
+        <header><h1>Gestion des pages</h1></header>
+        <aside><a href="./page/add" class="btn btn-primary">Créer une page</a></aside>
+        {% include 'includes/content_handler.html.twig' with {'array': global_pages, 'content_type': 'page'} %}
     </article>
 {% endblock %}

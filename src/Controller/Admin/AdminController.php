@@ -2,24 +2,24 @@
 namespace App\Controller\Admin;
 
 use App\EventSubscriber\Interfaces\IControllerSubscriber;
+use App\EventSubscriber\Interfaces\IHasAllPagesSubscriber;
+use App\EventSubscriber\Traits\AllPagesSubscriberTrait;
 use App\EventSubscriber\Traits\ControllerSubscriberTrait;
-use App\Service\ConfigService;
 use App\Service\Content\ArticleService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AdminController extends AbstractController
-	implements IControllerSubscriber
+	implements IControllerSubscriber, IHasAllPagesSubscriber
 {
 	use ControllerSubscriberTrait;
+	use AllPagesSubscriberTrait;
 
-	private $config_service;
 	private $article_service;
 	
-	public function __construct(ConfigService $config_service, ArticleService $article_service)
+	public function __construct(ArticleService $article_service)
 	{
-		$this->config_service = $config_service;
 		$this->article_service = $article_service;
 	}
 	

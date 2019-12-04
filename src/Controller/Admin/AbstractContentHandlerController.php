@@ -8,7 +8,7 @@ use App\Service\Admin\AbstractContentHandlerService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class AbstractContentHandlerController extends AbstractController
+abstract class AbstractContentHandlerController extends AbstractController
 {
     public function formHandler(Request $request, AbstractContentHandlerService $content_handler_service, ContentEntity $content)
     {
@@ -29,10 +29,23 @@ class AbstractContentHandlerController extends AbstractController
             }
         }
 
-        return $this->render('admin/content.html.twig', array(
+        return $this->render('admin/content_form.html.twig', array(
             'is_validate' => $is_validate,
-            'validate_message' => "ok",
+            'validate_message' => $this->getValidateMessage(),
             'form' => $form->createView(),
         ));
     }
+
+    public function deleteHandler(AbstractContentHandlerService $content_handler_service, int $id)
+    {
+        $content_handler_service->delete($id);
+
+        return $this->render('admin/delete.html.twig', array(
+            'deleted_message' => $this->getDeletedMessage()
+        ));
+    }
+
+    public abstract function getValidateMessage(): string;
+
+    public abstract function getDeletedMessage(): string;
 }
