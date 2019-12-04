@@ -6,7 +6,8 @@
 	<article>
 		<header><h1>{{ article.title }}</h1></header>
 		<aside>posté le {{ article.time|date("m/d/Y") }} par {{article.user.username}}</aside>
-		<p>{{ article.content|raw }}</p>
-
+		<div>
+			{{ article.content|raw }}
+		</div>
 	</article>
 {% endblock %}
