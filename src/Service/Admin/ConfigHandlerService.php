@@ -30,8 +30,7 @@ class ConfigHandlerService
         $o->setFullName($full_name);
         $o->setDescription($desc);
 
-        $this->em->persist($o);
-		$this->em->flush();
+        $this->save($o);
     }
 
 	public function update(string $name, ?string $value = null, ?string $full_name = null, ?string $desc = null, ?int $type = null): void
@@ -58,8 +57,7 @@ class ConfigHandlerService
             $o->setDescription($desc);
         }
 		
-		$this->em->persist($o);
-		$this->em->flush();
+		$this->save($o);
     }
     
     public function delete(string $name): void
@@ -67,6 +65,12 @@ class ConfigHandlerService
         $o = $this->config_service->getConfigEntityByName($name);
 
         $this->em->remove($o);
+        $this->em->flush();
+    }
+
+    public function save(ConfigEntity $o)
+    {
+        $this->em->persist($o);
         $this->em->flush();
     }
 }

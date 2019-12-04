@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <article>
+        <header><h1>Configuration</h1></header>
+        <table class="table table-striped">
+            <tbody>
+            {% for o in configs %}
+                <tr>
+                    <td class="w-75">{{ o.fullName }}</td>
+                    <td>
+                        <a href="./config/update/{{ o.name }}" class="btn btn-primary float-right">Modifier</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </article>
+
     <artcile>
         <header><h1>Gestion des articles</h1></header>
         <aside><a href="./article/add" class="btn btn-primary">Créer un article</a></aside>

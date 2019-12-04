@@ -3,19 +3,16 @@ namespace App\Controller\Admin;
 
 use App\Entity\PageEntity;
 use App\Service\Admin\PageHandlerService;
-use App\Service\Content\PageService;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PageHandlerController extends AbstractContentHandlerController
 {
-    private $page_service;
     private $page_handler_service;
 
-    public function __construct(PageService $page_service, PageHandlerService $page_handler_service)
+    public function __construct(PageHandlerService $page_handler_service)
     {
-        $this->page_service = $page_service;
         $this->page_handler_service = $page_handler_service;
     }
 
@@ -32,10 +29,8 @@ class PageHandlerController extends AbstractContentHandlerController
     /**
      * @Route("%admin_path%/page/update/{id}", name="page_update")
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, PageEntity $page)
     {
-        $page = $this->page_service->getById($id);
-
         return parent::formHandler($request, $this->page_handler_service, $page);
     }
 

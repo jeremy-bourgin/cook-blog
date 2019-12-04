@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if is_validate %}
+        <p class="text-success">La configuration a bien été modifié</p>
+        <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a>
+    {% else %}
+    	{{ form(form) }}
+    {% endif %}
+
+{% endblock %}

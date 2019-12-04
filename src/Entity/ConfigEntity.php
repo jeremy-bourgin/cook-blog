@@ -6,6 +6,10 @@ use App\Exception\Config\InvalidConfigException;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 /**
  * ConfigEntity
  *
@@ -84,6 +88,30 @@ class ConfigEntity
     {
         $this->name = $name;
         $this->type = self::STRING_TYPE;
+    }
+
+    public function getInputType(): string
+    {
+        switch($this->type)
+        {
+            case "bool":
+                $r = ChoiceType::class;
+            break;
+
+            case "int":
+                $r = IntegerType::class;
+            break;
+
+            case "string":
+                $r = TextType::class;
+            break;
+
+            default:
+                $r = TextType::class;
+            break;
+        }
+
+        return $r;
     }
 
     public function getValue()
