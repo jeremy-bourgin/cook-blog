@@ -1,7 +1,8 @@
 1. panel admin : gestion user
 2. article summerize + image
 3. supression user (avec vérification hiérarchi de rôle)
-4. contact
-5. ajout et utilisation de configuration
-6. traduction
-7. readme
+4. ajout et utilisation de configuration
+5. design
+6. contact
+7. traduction
+8. readme
