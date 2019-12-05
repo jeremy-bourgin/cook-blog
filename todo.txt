@@ -1,3 +1,4 @@
+0. lien avec "path"
 1. panel admin : gestion user
 2. article summerize + image
 3. supression user (avec vérification hiérarchi de rôle)
