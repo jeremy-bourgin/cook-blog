@@ -21,6 +21,7 @@ fos_admin_resetting:
     prefix:     '%admin_path%/fos/resetting'
 
 fos_admin_add_user:
+    name_prefix: "admin_"
     resource:   "@FOSUserBundle/Resources/config/routing/registration.xml"
     prefix:     '%admin_path%/fos/add'
 

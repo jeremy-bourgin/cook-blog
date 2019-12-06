@@ -40,7 +40,7 @@ abstract class AbstractContentHandlerController extends AbstractController
     {
         $content_handler_service->delete($id);
 
-        return $this->render('admin/delete.html.twig', array(
+        return $this->render('admin/content_delete.html.twig', array(
             'deleted_message' => $this->getDeletedMessage()
         ));
     }

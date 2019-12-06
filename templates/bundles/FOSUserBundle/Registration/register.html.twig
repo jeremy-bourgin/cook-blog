@@ -4,12 +4,14 @@
 
 {% block body %}
 
-{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-    <div class="form-group">
-        {{ form_label(form.roles) }}
-        {{ form_widget(form.roles, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
-        {{ form_errors(form.roles) }}
-    </div>
+{{ form_start(form, {'method': 'post', 'action': path('admin_fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="form-group">
+            {{ form_label(form.roles) }}
+            {{ form_widget(form.roles, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+            {{ form_errors(form.roles) }}
+        </div>
+    {% endif %}
 
     <div class="form-group">
         {{ form_label(form.email) }}
