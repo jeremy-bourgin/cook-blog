@@ -6,7 +6,7 @@
 			<header><h1><a href="/article/{{ o.url }}">{{ o.title }}</a></h1></header>
 			<p>{{ o.content|length > content_limit ? o.content|slice(0, content_limit)|raw ~ '...' : o.content|raw }}</p>
 			{% if o.content|length > content_limit %}
-				<a href="/article/{{ o.url }}">Lire la suite</a>
+				<a href="{{ path('article', {'url': o.url}) }}">Lire la suite</a>
 			{% endif %}
 		</article>
 	{% endfor %}

@@ -26,7 +26,7 @@
 				<a href="/" class="nav-item nav-link">Accueil</a>
 				
 				{% for p in global_pages %}
-					<a href="/page/{{ p.url }}" class="nav-item nav-link">{{ p.title }}</a>
+					<a href="{{ path('page', {'url': p.url}) }}" class="nav-item nav-link">{{ p.title }}</a>
 				{% endfor %}
 
 				<a href="/contact" class="nav-item nav-link">Contact</a>

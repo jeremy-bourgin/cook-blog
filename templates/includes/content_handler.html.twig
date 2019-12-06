@@ -4,10 +4,10 @@
         <tr>
             <td class="w-75">{{ o.title }}</td>
             <td class="form-group">
-                <a href="./{{ content_type }}/update/{{ o.id }}" class="form-control btn btn-primary">Modifier</a>
+                <a href="{{ path(update_path_name, {id: o.id}) }}" class="form-control btn btn-primary">Modifier</a>
             </td>
             <td class="form-group">
-                <a href="./{{ content_type }}/delete/{{ o.id }}" class="form-control btn btn-primary">Supprimer</a>
+                <a href="{{ path(delete_path_name, {id: o.id}) }}" class="form-control btn btn-primary">Supprimer</a>
             </td>
         </tr>
     {% endfor %}

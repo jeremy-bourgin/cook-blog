@@ -9,7 +9,7 @@
                 <tr>
                     <td class="w-75">{{ o.fullName }}</td>
                     <td>
-                        <a href="./config/update/{{ o.name }}" class="btn btn-primary float-right">Modifier</a>
+                        <a href="{{ path('update_config', {'name':o.name}) }}" class="btn btn-primary float-right">Modifier</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -19,13 +19,21 @@
 
     <artcile>
         <header><h1>Gestion des articles</h1></header>
-        <aside><a href="./article/add" class="btn btn-primary">Créer un article</a></aside>
-        {% include 'includes/content_handler.html.twig' with {'array': articles, 'content_type': 'article'} %}
+        <aside><a href="{{ path('article_add') }}" class="btn btn-primary">Créer un article</a></aside>
+        {% include'includes/content_handler.html.twig' with {
+            'array': articles,
+            'update_path_name': 'article_update',
+            'delete_path_name': 'article_delete'
+        } %}
     </article>
 
     <artcile>
         <header><h1>Gestion des pages</h1></header>
-        <aside><a href="./page/add" class="btn btn-primary">Créer une page</a></aside>
-        {% include 'includes/content_handler.html.twig' with {'array': global_pages, 'content_type': 'page'} %}
+        <aside><a href="{{ path('page_add') }}" class="btn btn-primary">Créer une page</a></aside>
+        {% include 'includes/content_handler.html.twig' with {
+            'array': global_pages,
+            'update_path_name': 'page_update',
+            'delete_path_name': 'page_delete'
+        } %}
     </article>
 {% endblock %}
