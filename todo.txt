@@ -1,3 +1,4 @@
+0. form unique constraint (and other enventualy)
 1. panel admin : gestion
     > ajout
     > gestion
@@ -9,9 +10,9 @@
 
 2. delete confirmation
 3. article summerize + image
-4. ajout et utilisation de configuration
-5. restriction url parameter (int)
-6. design
-7. contact
+4. contact
+5. ajout et utilisation de configuration
+6. restriction url parameter (int)
+7. design
 8. traduction (template + controller error + exception)
 9. readme

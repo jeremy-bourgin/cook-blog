@@ -11,9 +11,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(
  *	name="cblog_article",
- * 	uniqueConstraints={
- *	 @ORM\UniqueConstraint(name="UC_ARTICLE_URL",columns={"url"})
- *	},
  *	indexes={
 	 @ORM\Index(name="IDX_ARTICLE_URL", columns={"url"}),
  *	 @ORM\Index(name="IDX_ARTICLE_USER_ID", columns={"id_user"})

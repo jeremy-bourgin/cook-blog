@@ -10,11 +10,6 @@ use FOS\UserBundle\Model\User as BaseUser;
  *
  * @ORM\Table(
  * 	name="cblog_user",
- * 	uniqueConstraints={
- *	 @ORM\UniqueConstraint(name="UC_USER_USERNAME", columns={"username"}),
- *	 @ORM\UniqueConstraint(name="UC_USER_EMAIL",columns={"email"}),
- *	 @ORM\UniqueConstraint(name="UC_USER_PASSWORD", columns={"password"})
- *	},
  * 	indexes={
  *	 @ORM\Index(name="IDX_USER_USERNAME", columns={"username"})
  *	}

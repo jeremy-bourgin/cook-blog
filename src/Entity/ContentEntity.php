@@ -3,10 +3,16 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 /**
  * ContentEntity
  *
  * @ORM\MappedSuperclass
+ * @UniqueEntity(
+ *  fields="url",
+ *  message="unique_url"
+ * )
  */
 abstract class ContentEntity
 {
@@ -22,7 +28,7 @@ abstract class ContentEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="url", type="string", length=100, nullable=false)
+     * @ORM\Column(name="url", type="string", length=100, nullable=false, unique=true)
      */
 	private $url;
 

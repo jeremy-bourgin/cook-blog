@@ -8,9 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="cblog_page",
- * 	uniqueConstraints={
- *	 @ORM\UniqueConstraint(name="UC_PAGE_URL",columns={"url"})
- *	},
  *	indexes={
 	 @ORM\Index(name="IDX_PAGE_URL", columns={"url"})
  *	}

@@ -6,6 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ConfigForm extends AbstractType
 {
@@ -29,5 +30,12 @@ class ConfigForm extends AbstractType
         	->add('name', TextType::class)
             ->add('raw_value', $type, $choices)
             ->add('save', SubmitType::class);
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'translation_domain' => 'config_form'
+        ));
     }
 }

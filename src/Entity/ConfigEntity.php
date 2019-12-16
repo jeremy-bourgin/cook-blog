@@ -6,6 +6,7 @@ use App\Exception\Config\InvalidConfigException;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,6 +16,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
  *
  * @ORM\Entity
  * @ORM\Table(name="cblog_config")
+ * @UniqueEntity(
+ *  fields="name",
+ *  message="unique_name"
+ * )
  */
 class ConfigEntity
 {
@@ -25,7 +30,7 @@ class ConfigEntity
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=100, nullable=false)
+     * @ORM\Column(name="name", type="string", length=100, nullable=false, unique=true)
 	 * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      */
