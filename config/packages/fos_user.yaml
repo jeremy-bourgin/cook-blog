@@ -4,9 +4,9 @@ fos_user:
     user_class: App\Entity\UserEntity
     from_email:
         address: "jeremy.bourgin@etu.umontpellier.fr"
-        sender_name: "jeremy.bourgin@etu.umontpellier.fr"
+        sender_name: "Jérémy BOURGIN"
     registration:
         confirmation:
-            enabled: false
+            enabled: true
         form:
             type: App\Form\RegisterForm

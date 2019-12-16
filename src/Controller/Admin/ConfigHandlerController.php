@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UpdateConfigController extends AbstractController
+class ConfigHandlerController extends AbstractController
 {
     private $config_handler_service;
 
@@ -19,28 +19,23 @@ class UpdateConfigController extends AbstractController
     }
 
     /**
-     * @Route("%admin_path%/config/update/{name}", name="update_config")
+     * @Route("%admin_path%/config/update/{name}", name="config_update")
      */
     public function update(Request $request, ConfigEntity $config)
     {
         $form = $this->createForm(ConfigForm::class, $config);
+        $form->handleRequest($request);
 
-        $is_validate = false;
+        $is_submited = $form->isSubmitted();
+        $is_validate = $is_submited && $form->isValid();
 
-        if ($request->getMethod() === "POST")
+        if ($is_validate)
         {
-            $form->handleRequest($request);
-
-            $is_validate = $form->isSubmitted() && $form->isValid();
-
-            if ($is_validate)
-            {
-                $data = $form->getData();
-                $this->config_handler_service->save($data);
-            }
+            $data = $form->getData();
+            $this->config_handler_service->save($data);
         }
 
-        return $this->render('admin/config.html.twig', array(
+        return $this->render('admin/config/config.html.twig', array(
             'is_validate' => $is_validate,
             'form' => $form->createView(),
         ));

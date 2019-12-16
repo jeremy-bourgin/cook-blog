@@ -3,13 +3,13 @@
 {% block body %}
     <article>
         <header><h1>Configuration</h1></header>
-        <table class="table table-striped">
+        <table class="table table-striped table-list">
             <tbody>
             {% for o in configs %}
                 <tr>
                     <td class="w-75">{{ o.fullName }}</td>
                     <td>
-                        <a href="{{ path('update_config', {'name':o.name}) }}" class="btn btn-primary float-right">Modifier</a>
+                        <a href="{{ path('config_update', {'name': o.name}) }}" class="btn btn-primary float-right">Modifier</a>
                     </td>
                 </tr>
             {% endfor %}
@@ -19,8 +19,7 @@
 
     <article>
         <header><h1>Gestion des utilisateurs</h1></header>
-        <a href="{{ path('admin_fos_user_registration_register') }}" class="btn btn-primary">Ajouter un utilisateur</a>
-        <a href="{{ path('admin_user_delete') }}" class="btn btn-primary">Supprimer un utilisateur</a>
+        <a href="{{ path('admin_user_add') }}" class="btn btn-primary">Ajouter un utilisateur</a>
     </article>
 
     <article>
