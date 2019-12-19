@@ -10,6 +10,15 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractContentHandlerController extends AbstractController
 {
+    public function indexHanlder(array $contents, string $update_path_name, string $delete_path_name)
+    {
+        return $this->render('admin/content/index.html.twig', array(
+            'contents' => $contents,
+            'update_path_name' => $update_path_name,
+            'delete_path_name' => $delete_path_name
+        ));
+    }
+
     public function formHandler(Request $request, AbstractContentHandlerService $content_handler_service, ContentEntity $content)
     {
         $form = $this->createForm(ContentForm::class, $content);

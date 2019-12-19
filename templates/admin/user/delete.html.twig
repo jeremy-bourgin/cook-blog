@@ -1,28 +1,5 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if is_deleting %}
-        <p class="text-success">L'utilisateur a été supprimé avec succès</p>
-    {% else %}
-        {% set is_empty = true %}
-
-        <table class="table table-striped table-list">
-            <tbody>
-            {% for o in users if is_granted(o.roles) and not o.isSuperAdmin() %}
-                {% set is_empty = false %}
-            
-                <tr>
-                    <td class="w-75">{{ o.username }}</td>
-                    <td>
-                        <a href="{{ path('admin_user_delete', {id: o.id}) }}" class="btn btn-primary float-right">Supprimer</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-
-        {% if is_empty %}
-            <p class="text-error">Il n'y a aucun utilisateur</p>
-        {% endif %}
-    {% endif %}
+    <p class="text-success">L'utilisateur a été supprimé avec succès</p>
 {% endblock %}

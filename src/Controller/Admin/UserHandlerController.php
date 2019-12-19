@@ -2,12 +2,15 @@
 
 namespace App\Controller\Admin;
 
-use App\Form\AdminRegisterForm;
+use App\Entity\UserEntity;
+use App\Form\RegisterForm;
 
+use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Form\Factory\FactoryInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,17 +33,12 @@ class UserHandlerController extends AbstractController
         $users = $this->user_manager->findUsers();
 
         return $this->render('admin/user/index.html.twig', array(
-            'is_deleting' => $is_deleting,
             'users' => $users
         ));
     }
 
-    /**
-     * @Route("%admin_path%/user/add", name="admin_user_add")
-     */
-    public function add(Request $request)
+    public function userForm(Request $request, UserEntity $user)
     {
-        $user = $this->user_manager->createUser();
         $user->setEnabled(true);
 
         $form = $this->form_factory->createForm();
@@ -55,10 +53,29 @@ class UserHandlerController extends AbstractController
             $this->user_manager->updateUser($user);
         }
 
-        return $this->render('admin/user/add.html.twig', array(
+        return $this->render('admin/user/form.html.twig', array(
             'is_validate' => $is_validate,
             'form' => $form->createView(),
+            'user' => $user
         ));
+    }
+
+    /**
+     * @Route("%admin_path%/user/add", name="admin_user_add")
+     */
+    public function add(Request $request)
+    {
+        $user = $this->user_manager->createUser();
+
+        return $this->userForm($request, $user);
+    }
+
+    /**
+     * @Route("%admin_path%/user/update/{id}", name="admin_user_update")
+     */
+    public function update(Request $request, UserEntity $user)
+    {
+        return $this->userForm($request, $user);
     }
 
     /**

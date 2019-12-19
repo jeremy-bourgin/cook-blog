@@ -5,9 +5,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-
 
 class RegisterForm extends AbstractType
 {
@@ -22,12 +22,26 @@ class RegisterForm extends AbstractType
     {
         parent::buildForm($builder, $options);
 
-        if(!$this->checker->isGranted('ROLE_ADMIN'))
+        $builder
+            ->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'roles'));
+    }
+
+    public function roles(FormEvent $event)
+    {
+        $user = $event->getData();
+        $form = $event->getForm();
+
+        if ($user === null)
         {
             return;
         }
 
-        $builder
+        if(!$this->checker->isGranted('ROLE_ADMIN') || $user->hasRole('ROLES_SUPER_ADMIN'))
+        {
+            return;
+        }
+
+        $form
             ->add('roles', ChoiceType::class, array(
                 'choices' => array(
                     'admin' => 'ROLE_ADMIN',
@@ -36,15 +50,6 @@ class RegisterForm extends AbstractType
                 'multiple' => true,
                 'required' => true,
             ));
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults(array(
-            'roles' => array('ROLE_USER')
-        ));
     }
 
     public function getParent()

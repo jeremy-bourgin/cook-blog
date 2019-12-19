@@ -2,13 +2,18 @@
 namespace App\Controller\Admin;
 
 use App\Entity\PageEntity;
+use App\EventSubscriber\Interfaces\IHasAllPagesSubscriber;
+use App\EventSubscriber\Traits\AllPagesSubscriberTrait;
 use App\Service\Admin\PageHandlerService;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PageHandlerController extends AbstractContentHandlerController
+    implements IHasAllPagesSubscriber
 {
+    use AllPagesSubscriberTrait;
+
     private $page_handler_service;
 
     public function __construct(PageHandlerService $page_handler_service)
@@ -17,7 +22,21 @@ class PageHandlerController extends AbstractContentHandlerController
     }
 
     /**
-     * @Route("%admin_path%/page/add", name="page_add")
+     * @Route("%admin_path%/page/", name="admin_page_index")
+     */
+    public function index()
+    {
+        $pages = $this->getAllPages();
+
+        return parent::indexHanlder(
+            $pages,
+            'admin_page_update',
+            'admin_page_delete'
+        );
+    }
+
+    /**
+     * @Route("%admin_path%/page/add", name="admin_page_add")
      */
     public function add(Request $request)
     {
@@ -27,7 +46,7 @@ class PageHandlerController extends AbstractContentHandlerController
     }
 
     /**
-     * @Route("%admin_path%/page/update/{id}", name="page_update")
+     * @Route("%admin_path%/page/update/{id}", name="admin_page_update")
      */
     public function update(Request $request, PageEntity $page)
     {
@@ -35,7 +54,7 @@ class PageHandlerController extends AbstractContentHandlerController
     }
 
     /**
-     * @Route("%admin_path%/page/delete/{id}", name="page_delete")
+     * @Route("%admin_path%/page/delete/{id}", name="admin_page_delete")
      */
     public function delete(int $id)
     {

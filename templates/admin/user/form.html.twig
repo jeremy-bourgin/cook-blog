@@ -9,11 +9,13 @@
 {% endblock body %}
 
 {% block register_form %}
-    <div class="form-group">
-        {{ form_label(form.roles) }}
-        {{ form_widget(form.roles, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
-        {{ form_errors(form.roles) }}
-    </div>
+    {% if not user.hasRole('ROLE_SUPER_ADMIN') %}
+        <div class="form-group">
+            {{ form_label(form.roles) }}
+            {{ form_widget(form.roles, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+            {{ form_errors(form.roles) }}
+        </div>
+    {% endif %}
 
     {{ parent() }}
 {% endblock register_form %}

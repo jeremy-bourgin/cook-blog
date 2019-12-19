@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a>
+
+    {% include '/includes/content_handler.html.twig' with {
+        'array': contents,
+        'content_attr': 'title',
+        'update_path_name': update_path_name,
+        'delete_path_name': delete_path_name
+    } %}
+{% endblock %}

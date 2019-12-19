@@ -1,4 +1,3 @@
-0. form unique constraint (and other enventualy)
 1. panel admin : gestion
     > ajout
     > gestion

@@ -20,25 +20,18 @@
     <article>
         <header><h1>Gestion des utilisateurs</h1></header>
         <a href="{{ path('admin_user_add') }}" class="btn btn-primary">Ajouter un utilisateur</a>
+        <a href="{{ path('admin_user_index') }}" class="btn btn-primary">Gérer les utilisateurs</a>
     </article>
 
     <article>
         <header><h1>Gestion des articles</h1></header>
-        <aside><a href="{{ path('article_add') }}" class="btn btn-primary">Créer un article</a></aside>
-        {% include'includes/content_handler.html.twig' with {
-            'array': articles,
-            'update_path_name': 'article_update',
-            'delete_path_name': 'article_delete'
-        } %}
+        <a href="{{ path('admin_article_add') }}" class="btn btn-primary">Créer un article</a>
+        <a href="{{ path('admin_article_index') }}" class="btn btn-primary">Gérer les articles</a>
     </article>
 
     <article>
         <header><h1>Gestion des pages</h1></header>
-        <aside><a href="{{ path('page_add') }}" class="btn btn-primary">Créer une page</a></aside>
-        {% include 'includes/content_handler.html.twig' with {
-            'array': global_pages,
-            'update_path_name': 'page_update',
-            'delete_path_name': 'page_delete'
-        } %}
+        <a href="{{ path('admin_page_add') }}" class="btn btn-primary">Créer une page</a>
+        <a href="{{ path('admin_page_index') }}" class="btn btn-primary">Gérer les pages</a>
     </article>
 {% endblock %}
