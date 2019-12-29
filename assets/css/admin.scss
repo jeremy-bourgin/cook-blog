@@ -3,3 +3,22 @@
         vertical-align: middle !important;
     }
 }
+
+.form-file {
+    @extend .form-control;
+
+    &:after {
+        content: "Choisir une image";
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: $secondary;
+        height: inherit;
+        padding: inherit;
+        border-radius: 0 inherit inherit 0;
+    }
+}
+
+.textarea-summarize {
+    height: 5rem !important;
+}

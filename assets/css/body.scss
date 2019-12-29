@@ -1,5 +1,15 @@
 section#content > div {
 	background-color: $body-fg;
-	border: 2px solid $secondary;
-	border-radius: 10px;
+
+}
+
+h1 > a {
+	font-size: inherit;
+}
+
+@include media-breakpoint-up(xl) {
+	section#content > div {
+		border: 2px solid $secondary;
+		border-radius: 10px;
+	}
 }

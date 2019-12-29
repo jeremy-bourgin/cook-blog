@@ -4,12 +4,23 @@
     {{ parent() }}
 
     <div class="form-group">
-        {{ form_widget(form.summarize) }}
-        {{ form_errors(form.summarize) }}
+        {{ form_label(form.file) }}
+
+        {{ form_label(form.file, "Aucune image sélectionnée", { 'label_attr': {
+            'class': 'col-xl-8 form-file m-0',
+            'id': 'article_label_file'
+        }}) }}
+
+        {{ form_widget(form.file, { 'attr': {
+            'class': 'd-none',
+        } }) }}
+
+        {{ form_errors(form.file) }}
     </div>
 
     <div class="form-group">
-        {{ form_widget(form.file) }}
-        {{ form_errors(form.file) }}
+        {{ form_label(form.summarize) }}
+        {{ form_widget(form.summarize, { 'attr': { 'class': 'form-control col-xl-8 textarea-summarize' } }) }}
+        {{ form_errors(form.summarize) }}
     </div>
 {% endblock %}

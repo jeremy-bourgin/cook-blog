@@ -2,11 +2,13 @@
 
 {% block body %}
 	{% for o in articles %}
-		<article class="overflow-auto">
-			<header><h1><a href="/article/{{ o.url }}">{{ o.title }}</a></h1></header>
+		<article class="overflow-auto mb-3 pb-4 article-index">
+			<header>
+				<h1 class="h3"><a href="/article/{{ o.url }}">{{ o.title }}</a></h1>
+			</header>
 			<p>
 				<img src="{{ asset("files/#{o.filename}") }}" class="summarize-img mr-3" alt="Image résumant l'article">
-				{{ o.summarize | raw }}
+				{{ o.summarize }}
 			</p>
 		</article>
 	{% endfor %}

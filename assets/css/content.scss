@@ -1,7 +1,17 @@
 .summarize-img {
     max-width: 30%;
-    max-height: 300px;
+    max-height: 18rem;
     width: auto;
     height: auto;
     float: left;
+}
+
+.article-index {
+    border-bottom: 2px dashed $secondary;
+}
+
+.article-index:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
 }

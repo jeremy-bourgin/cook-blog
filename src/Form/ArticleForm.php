@@ -3,11 +3,11 @@ namespace App\Form;
 
 use App\Entity\ArticleEntity;
 
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ArticleForm extends AbstractType
 {
@@ -16,7 +16,7 @@ class ArticleForm extends AbstractType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('summarize', CKEditorType::class)
+            ->add('summarize', TextareaType::class)
             ->add('file', FileType::class, array(
                 'required' => false,
                 'mapped' => true

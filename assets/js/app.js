@@ -12,4 +12,5 @@
 require('bootstrap');
 
 // import your codes
+require("./admin.js");
 require("./message.js");

@@ -1,4 +1,3 @@
-1. article summerize + image
 2. pagination
 3. comment
 4. contact

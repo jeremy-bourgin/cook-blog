@@ -6,10 +6,15 @@
 DirectoryIndex index.php
 
 # clickbait protection
-Header add Content-Security-Policy "form-action 'self'; img-src 'self'; media-src 'self'; object-src 'none'; frame-src 'none'; frame-ancestors 'none';"
-Header add X-Content-Type-Options "nosniff"
-Header add X-Frame-Options "deny"
-Header add Access-Control-Allow-Methods "GET, POST"
+<IfModule mod_headers.c>
+	# désactiver les frame et object sur le site et les frames du site provenant d'autre site
+	Header add Content-Security-Policy "object-src 'none'; frame-src 'none'; frame-ancestors 'none';"
+	Header add X-Frame-Options "deny"
+	# protection sur les types MIME
+	Header add X-Content-Type-Options "nosniff"
+	Header add Access-Control-Allow-Methods "GET, POST"
+</IfModule>
+
 
 # By default, Apache does not evaluate symbolic links if you did not enable this
 # feature in your server configuration. Uncomment the following line if you

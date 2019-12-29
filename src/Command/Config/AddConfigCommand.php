@@ -36,11 +36,10 @@ class AddConfigCommand extends Command
         $name = $io->ask('Entrer le nom (clé)');
         $value = $io->ask('Entrer la valeur');
         $full_name = $io->ask('Entrer le nom complet (affichage)');
-        $desc = $io->ask('Entrer une description (facultatif)', null);
         $type_name = $io->ask('Entrer le type de valeur (bool | int | string). string par défaut', "string");
         $type = ConfigEntity::stringToType($type_name);
 
-        $this->config_handler_service->add($name, $value, $full_name, $desc, $type);
+        $this->config_handler_service->add($name, $value, $full_name, $type);
 
         $io->write('Le configuration a bien été créé');
     }

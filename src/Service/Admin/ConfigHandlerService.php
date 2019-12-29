@@ -17,7 +17,7 @@ class ConfigHandlerService
         $this->config_service = $config_service;
     }
 
-    public function add(string $name, string $value, string $full_name, ?string $desc = null, ?int $type = null): void
+    public function add(string $name, string $value, string $full_name, ?int $type = null): void
     {
         $o = new ConfigEntity($name);
 
