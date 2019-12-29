@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ArticleEntity;
+use App\Form\ArticleForm;
 use App\Service\Admin\ArticleHandlerService;
 use App\Service\Content\ArticleService;
 
@@ -26,11 +27,19 @@ class ArticleHandlerController extends AbstractContentHandlerController
     {
         $articles = $this->article_service->getAll();
         
-        return parent::indexHanlder(
+        return parent::indexHandler(
             $articles,
             'admin_article_update',
             'admin_article_delete'
         );
+    }
+
+    public function form(Request $request, ArticleEntity $article)
+    {
+        $form = $this->createForm(ArticleForm::class, $article);
+        $render_vars = parent::formHandler($request, $this->article_handler_service, $form);
+
+        return $this->render('admin/content/article_form.html.twig', $render_vars);
     }
 
     /**
@@ -42,7 +51,7 @@ class ArticleHandlerController extends AbstractContentHandlerController
         $article->setTime(time());
         $article->setUser($this->getUser());
 
-        return parent::formHandler($request, $this->article_handler_service, $article);
+        return $this->form($request, $article);
     }
 
     /**
@@ -50,15 +59,15 @@ class ArticleHandlerController extends AbstractContentHandlerController
      */
     public function update(Request $request, ArticleEntity $article)
     {
-        return parent::formHandler($request, $this->article_handler_service, $article);
+        return $this->form($request, $article);
     }
 
     /**
      * @Route("%admin_path%/article/delete/{id}", name="admin_article_delete", methods={"GET", "POST"})
      */
-    public function delete(int $id)
+    public function delete(ArticleEntity $article)
     {
-        return parent::deleteHandler($this->article_handler_service, $id);
+        return parent::deleteHandler($this->article_handler_service, $article);
     }
 
     public function getValidateMessage(): string

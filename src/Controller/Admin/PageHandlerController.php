@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 use App\Entity\PageEntity;
 use App\EventSubscriber\Interfaces\IHasAllPagesSubscriber;
 use App\EventSubscriber\Traits\AllPagesSubscriberTrait;
+use App\Form\ContentForm;
 use App\Service\Admin\PageHandlerService;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -28,13 +29,21 @@ class PageHandlerController extends AbstractContentHandlerController
     {
         $pages = $this->getAllPages();
 
-        return parent::indexHanlder(
+        return parent::indexHandler(
             $pages,
             'admin_page_update',
             'admin_page_delete'
         );
     }
 
+    public function form(Request $request, PageEntity $page)
+    {
+        $form = $this->createForm(ContentForm::class, $page);
+        $render_vars = parent::formHandler($request, $this->page_handler_service, $form);
+
+        return $this->render('admin/content/content_form.html.twig', $render_vars);
+    }
+    
     /**
      * @Route("%admin_path%/page/add", name="admin_page_add")
      */
@@ -42,7 +51,7 @@ class PageHandlerController extends AbstractContentHandlerController
     {
         $page = new PageEntity();
 
-        return parent::formHandler($request, $this->page_handler_service, $page);
+        return $this->form($request, $page);
     }
 
     /**
@@ -50,15 +59,15 @@ class PageHandlerController extends AbstractContentHandlerController
      */
     public function update(Request $request, PageEntity $page)
     {
-        return parent::formHandler($request, $this->page_handler_service, $page);
+        return $this->form($request, $page);
     }
 
     /**
      * @Route("%admin_path%/page/delete/{id}", name="admin_page_delete")
      */
-    public function delete(int $id)
+    public function delete(PageEntity $page)
     {
-        return parent::deleteHandler($this->page_handler_service, $id);
+        return parent::deleteHandler($this->page_handler_service, $page);
     }
 
     public function getValidateMessage(): string

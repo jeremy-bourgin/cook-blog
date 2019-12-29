@@ -9,12 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 abstract class AbstractContentHandlerService
 {
     protected $em;
-    protected $content_service;
 
-	public function __construct(EntityManagerInterface $em, AbstractContentService $content_service)
+	public function __construct(EntityManagerInterface $em)
 	{
         $this->em = $em;
-        $this->content_service = $content_service;
     }
 
     public function save(ContentEntity $o): void
@@ -23,10 +21,8 @@ abstract class AbstractContentHandlerService
 		$this->em->flush();
     }
 
-    public function delete(int $id): void
+    public function delete(ContentEntity $o): void
     {
-        $o = $this->content_service->getById($id);
-
         $this->em->remove($o);
         $this->em->flush();
     }

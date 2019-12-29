@@ -12,11 +12,17 @@ label {
 /* variables part */
 @import "./colors.scss";
 
+/* admin part */
+@import "./admin.scss";
+
 /* structures part */
 @import "./body.scss";
 
-/* admin part */
-@import "./admin.scss";
+/* structures part */
+@import "./content.scss";
+
+/* prompt part */
+@import "./message.scss";
 
 /* bootstraps part */
 @import "~bootstrap/scss/bootstrap";

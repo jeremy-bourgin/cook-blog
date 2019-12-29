@@ -12,4 +12,4 @@
 require('bootstrap');
 
 // import your codes
-require("./test.js");
+require("./message.js");

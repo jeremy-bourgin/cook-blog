@@ -1,9 +1,14 @@
 <?php
 namespace App\Entity;
 
+use App\Entity\Interfaces\IFileEntity;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ArticleEntity
@@ -17,8 +22,31 @@ use Doctrine\ORM\Mapping as ORM;
  *	}
  * )
  */
-class ArticleEntity extends ContentEntity
+class ArticleEntity extends ContentEntity implements IFileEntity
 {
+    const SUMMARIZE_MAXLENGTH = 255;
+    const DEFAULT_IMAGE = "article-no-image.png";
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="summarize", type="string", length=ArticleEntity::SUMMARIZE_MAXLENGTH, nullable=false)
+     */
+    private $summarize;
+
+    /**
+     * @ORM\Column(name="filename", type="string", length=255, nullable=false, options={"default" : ArticleEntity::DEFAULT_IMAGE})
+     */
+    private $filename = self::DEFAULT_IMAGE;
+
+    /**
+     * @Assert\File()
+     * @Assert\Image() 
+     */
+    private $file;
+
+    private $old_filename = null;
+
     /**
      * @var int
      *
@@ -104,5 +132,56 @@ class ArticleEntity extends ContentEntity
         return $this;
     }
 
+    public function getSummarize(): ?string
+    {
+        return $this->summarize;
+    }
 
+    public function setSummarize(string $summarize): self
+    {
+        $this->summarize = $summarize;
+
+        return $this;
+    }
+
+    /* BEGIN : Image handler part */
+    public function getFilename(): ?string
+    {
+        return $this->filename;
+    }
+
+    public function setFilename(?string $filename): self
+    {
+        if ($filename === null)
+        {
+            $filename = self::DEFAULT_IMAGE;
+        }
+
+        $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    public function setFile(?File $file = null): self
+    {
+        $this->file = $file;
+
+        if ($this->filename !== self::DEFAULT_IMAGE)
+        {
+            $this->old_filename = $this->filename;
+        }
+
+        return $this;
+    }
+
+    public function getOldFilename(): ?string
+    {
+        return $this->old_filename;
+    }
+    /* END : Image handler part */
 }

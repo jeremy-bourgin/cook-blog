@@ -6,7 +6,8 @@
     {% include '/includes/content_handler.html.twig' with {
         'array': contents,
         'content_attr': 'title',
+        'id_column': 'id',
         'update_path_name': update_path_name,
         'delete_path_name': delete_path_name
-    } %}
+    } only %}
 {% endblock %}

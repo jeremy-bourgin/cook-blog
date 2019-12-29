@@ -8,7 +8,8 @@
     {% include '/includes/content_handler.html.twig' with {
         'array': users,
         'content_attr': 'username',
-        'update_path_name': 'admin_user_update',
+        'id_column': 'id',
+		'update_path_name': false,
         'delete_path_name': 'admin_user_delete'
-    } %}
+    } only %}
 {% endblock %}

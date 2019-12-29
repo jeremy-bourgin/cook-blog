@@ -37,8 +37,13 @@ class UserHandlerController extends AbstractController
         ));
     }
 
-    public function userForm(Request $request, UserEntity $user)
+    /**
+     * @Route("%admin_path%/user/add", name="admin_user_add")
+     */
+    public function add(Request $request)
     {
+        $user = $this->user_manager->createUser();
+
         $user->setEnabled(true);
 
         $form = $this->form_factory->createForm();
@@ -53,29 +58,11 @@ class UserHandlerController extends AbstractController
             $this->user_manager->updateUser($user);
         }
 
-        return $this->render('admin/user/form.html.twig', array(
+        return $this->render('admin/user/add.html.twig', array(
             'is_validate' => $is_validate,
             'form' => $form->createView(),
             'user' => $user
         ));
-    }
-
-    /**
-     * @Route("%admin_path%/user/add", name="admin_user_add")
-     */
-    public function add(Request $request)
-    {
-        $user = $this->user_manager->createUser();
-
-        return $this->userForm($request, $user);
-    }
-
-    /**
-     * @Route("%admin_path%/user/update/{id}", name="admin_user_update")
-     */
-    public function update(Request $request, UserEntity $user)
-    {
-        return $this->userForm($request, $user);
     }
 
     /**

@@ -38,7 +38,7 @@ class ArticleService extends AbstractContentService
 		return $request;
 	}
 
-	protected function createGetAllFromPageRequest(int $page, bool $with_comments = true, bool $with_user = true): QueryBuilder
+	protected function createGetAllFromPageRequest(int $page, bool $with_comments = false, bool $with_user = false): QueryBuilder
 	{
 		$request = parent::createGetAllFromPageRequest($page);
 		$this->join($request, $with_comments, $with_user);

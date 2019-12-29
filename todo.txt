@@ -1,14 +1,6 @@
-1. panel admin : gestion
-    > ajout
-    > gestion
-        > retour
-        > ajout
-        > list
-            > modifier
-            > supprimer
-
-2. delete confirmation
-3. article summerize + image
+1. article summerize + image
+2. pagination
+3. comment
 4. contact
 5. ajout et utilisation de configuration
 6. restriction url parameter (int)

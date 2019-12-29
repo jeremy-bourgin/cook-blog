@@ -24,3 +24,7 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 .env.local
+
+/public/files/*
+
+!.gitkeep

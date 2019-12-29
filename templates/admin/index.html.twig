@@ -3,18 +3,13 @@
 {% block body %}
     <article>
         <header><h1>Configuration</h1></header>
-        <table class="table table-striped table-list">
-            <tbody>
-            {% for o in configs %}
-                <tr>
-                    <td class="w-75">{{ o.fullName }}</td>
-                    <td>
-                        <a href="{{ path('config_update', {'name': o.name}) }}" class="btn btn-primary float-right">Modifier</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        {% include '/includes/content_handler.html.twig' with {
+            'array': configs,
+            'content_attr': 'fullName',
+            'id_column': 'name',
+            'update_path_name': 'config_update',
+            'delete_path_name': false
+        } only %}
     </article>
 
     <article>

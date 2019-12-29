@@ -2,12 +2,12 @@
 
 {% block body %}
 	{% for o in articles %}
-		<article>
+		<article class="overflow-auto">
 			<header><h1><a href="/article/{{ o.url }}">{{ o.title }}</a></h1></header>
-			<p>{{ o.content|length > content_limit ? o.content|slice(0, content_limit)|raw ~ '...' : o.content|raw }}</p>
-			{% if o.content|length > content_limit %}
-				<a href="{{ path('article', {'url': o.url}) }}">Lire la suite</a>
-			{% endif %}
+			<p>
+				<img src="{{ asset("files/#{o.filename}") }}" class="summarize-img mr-3" alt="Image résumant l'article">
+				{{ o.summarize | raw }}
+			</p>
 		</article>
 	{% endfor %}
 {% endblock %}

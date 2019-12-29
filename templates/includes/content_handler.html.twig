@@ -7,12 +7,21 @@
 
         <tr>
             <td class="w-75">{{ attribute(o, content_attr) }}</td>
-            <td class="form-group">
-                <a href="{{ path(update_path_name, {id: o.id}) }}" class="form-control btn btn-primary">Modifier</a>
-            </td>
-            <td class="form-group">
-                <a href="{{ path(delete_path_name, {id: o.id}) }}" class="form-control btn btn-primary">Supprimer</a>
-            </td>
+            {% if update_path_name %}
+                <td class="form-group">
+                    <a href="{{ path(update_path_name, {id: attribute(o, id_column)}) }}" class="form-control btn btn-primary">Modifier</a>
+                </td>
+            {% endif %}
+
+            {% if delete_path_name %}
+                <td class="form-group">
+                    <button
+                        class="form-control btn btn-primary"
+                        onclick="window.display_prompt('Êtes-vous sure de bien vouloir supprimer cet élément', '{{ path(delete_path_name, {id: attribute(o, id_column)}) }}')">
+                            Supprimer
+                        </button>
+                </td>
+            {% endif %}
         </tr>
     {% endfor %}
     </tbody>

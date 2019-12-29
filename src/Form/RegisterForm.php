@@ -36,7 +36,7 @@ class RegisterForm extends AbstractType
             return;
         }
 
-        if(!$this->checker->isGranted('ROLE_ADMIN') || $user->hasRole('ROLES_SUPER_ADMIN'))
+        if(!$this->checker->isGranted('ROLE_ADMIN'))
         {
             return;
         }
