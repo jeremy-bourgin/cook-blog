@@ -1,3 +1,13 @@
+.article-list {
+    border-bottom: 2px dashed $secondary;
+}
+
+.article-list:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    border-bottom: 0 !important;
+}
+
 .summarize-img {
     max-width: 30%;
     max-height: 18rem;
@@ -6,12 +16,6 @@
     float: left;
 }
 
-.article-index {
-    border-bottom: 2px dashed $secondary;
-}
-
-.article-index:last-child {
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-    border-bottom: 0 !important;
+p:last-child {
+    margin-bottom: 0;
 }

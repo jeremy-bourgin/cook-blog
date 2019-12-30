@@ -8,8 +8,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-	const CONTENT_LIMIT = 50;
-
     private $article_service;
 
     public function __construct(ArticleService $article_service)
@@ -26,8 +24,7 @@ class IndexController extends AbstractController
         $articles = $this->article_service->getAllFromPage($offset - 1);
 
         return $this->render('content/index.html.twig', [
-            "articles" => $articles,
-			"content_limit" => self::CONTENT_LIMIT
+            "articles" => $articles
         ]);
     }
 

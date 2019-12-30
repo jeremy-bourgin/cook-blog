@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <article>
+    <article class="article-list mb-3 pb-4">
         <header><h1>Configuration</h1></header>
         {% include '/includes/content_handler.html.twig' with {
             'array': configs,
@@ -12,19 +12,19 @@
         } only %}
     </article>
 
-    <article>
+    <article class="article-list mb-3 pb-4">
         <header><h1>Gestion des utilisateurs</h1></header>
         <a href="{{ path('admin_user_add') }}" class="btn btn-primary">Ajouter un utilisateur</a>
         <a href="{{ path('admin_user_index') }}" class="btn btn-primary">Gérer les utilisateurs</a>
     </article>
 
-    <article>
+    <article class="article-list mb-3 pb-4">
         <header><h1>Gestion des articles</h1></header>
         <a href="{{ path('admin_article_add') }}" class="btn btn-primary">Créer un article</a>
         <a href="{{ path('admin_article_index') }}" class="btn btn-primary">Gérer les articles</a>
     </article>
 
-    <article>
+    <article class="article-list mb-3 pb-4">
         <header><h1>Gestion des pages</h1></header>
         <a href="{{ path('admin_page_add') }}" class="btn btn-primary">Créer une page</a>
         <a href="{{ path('admin_page_index') }}" class="btn btn-primary">Gérer les pages</a>

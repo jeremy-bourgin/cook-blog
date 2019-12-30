@@ -1,6 +1,7 @@
-2. pagination
-3. comment
-4. contact
+1. pagination
+2. comment
+3. contact
+4. gestion erreur (affichage 404 403 500... + exception)
 5. ajout et utilisation de configuration
 6. restriction url parameter (int)
 7. design

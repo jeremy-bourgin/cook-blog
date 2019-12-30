@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+	{% set is_empty = true %}
+
 	{% for o in articles %}
-		<article class="overflow-auto mb-3 pb-4 article-index">
+		{% set is_empty = false %}
+
+		<article class="overflow-auto mb-3 pb-4 article-list">
 			<header>
 				<h1 class="h3"><a href="/article/{{ o.url }}">{{ o.title }}</a></h1>
 			</header>
@@ -12,4 +16,8 @@
 			</p>
 		</article>
 	{% endfor %}
+
+	{% if is_empty %}
+		<p class="text-error">Il n'y a aucun article</p>
+	{% endif %}
 {% endblock %}

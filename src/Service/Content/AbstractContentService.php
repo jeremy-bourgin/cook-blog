@@ -10,7 +10,7 @@ use Doctrine\ORM\QueryBuilder;
 
 abstract class AbstractContentService
 {
-	const LIMIT_PAGE = 10;
+	const LIMIT_PAGE = 4;
 	
 	protected $em;
 	protected $rep;
