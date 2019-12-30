@@ -25,11 +25,10 @@ class ArticleController extends AbstractController
     public function index(Request $request, string $url)
     {
         $article = $this->article_service->getByUrl($url);
-        $comments = $this->comment_service->getByArticle($article);
+        //$comments = $this->comment_service->getByArticle($article);
 
         return $this->render('content/article.html.twig', array(
-            'article' => $article,
-            'comments' => $comments
+            'article' => $article
         ));
     }
 }
