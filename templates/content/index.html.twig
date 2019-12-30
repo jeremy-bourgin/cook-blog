@@ -8,7 +8,7 @@
 
 		<article class="overflow-auto mb-3 pb-4 article-list">
 			<header>
-				<h1 class="h3"><a href="/article/{{ o.url }}">{{ o.title }}</a></h1>
+				<h1 class="h3"><a href="{{ path('article', {url: o.url}) }}">{{ o.title }}</a></h1>
 			</header>
 			<p>
 				<img src="{{ asset("files/#{o.filename}") }}" class="summarize-img mr-3" alt="Image résumant l'article">
@@ -20,4 +20,10 @@
 	{% if is_empty %}
 		<p class="text-error">Il n'y a aucun article</p>
 	{% endif %}
+
+	{% include '/includes/pagination.html.twig' with {
+		'route_name': 'index_pagined',
+		'nb_page': nb_page,
+		'current_page': current_page
+	} only %}
 {% endblock %}

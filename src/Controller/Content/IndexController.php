@@ -22,10 +22,13 @@ class IndexController extends AbstractController
     public function index(int $offset=1)
     {
         $articles = $this->article_service->getAllFromPage($offset - 1);
+        $nb_page = $this->article_service->getNbPage();
 
-        return $this->render('content/index.html.twig', [
-            "articles" => $articles
-        ]);
+        return $this->render('content/index.html.twig', array(
+            "articles" => $articles,
+            "current_page" => $offset,
+            "nb_page" => $nb_page
+        ));
     }
 
 }

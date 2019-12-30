@@ -14,6 +14,8 @@ abstract class AbstractContentService
 	
 	protected $em;
 	protected $rep;
+
+	protected $counted = null;
 	
 	public function __construct(EntityManagerInterface $em, ObjectRepository $rep)
 	{
@@ -119,5 +121,26 @@ abstract class AbstractContentService
 		$result = $query->getResult();
 		
 		return $result;
+	}
+
+	public function count(): int
+	{
+		if ($this->counted === null)
+		{
+			$this->counted = $this->rep->createQueryBuilder('c')
+            ->select('count(c)')
+            ->getQuery()
+            ->getSingleScalarResult();
+		}
+
+		return $this->counted;
+	}
+
+	public function getNbPage(): int
+	{
+		$count = $this->count();
+		$nb_page = ceil($count / self::LIMIT_PAGE);
+
+		return $nb_page;
 	}
 }

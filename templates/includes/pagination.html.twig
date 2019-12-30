@@ -1,0 +1,63 @@
+{% set left_page = current_page - 1 %}
+{% set right_page = current_page + 1 %}
+
+{% set has_left = (left_page > 1) %}
+{% set has_right = (right_page < nb_page) %}
+
+{% set has_second = ((left_page - 1) == 2) %}
+{% set has_before_last = ((right_page + 1) == (nb_page - 1)) %}
+
+{% set has_left_eli = ((left_page - 1) > 2) %}
+{% set has_right_eli = ((right_page + 1) < (nb_page - 1)) %}
+
+{% set has_before = (current_page > 1) %}
+{% set has_next = (current_page < nb_page) %}
+
+{% set has_first = (current_page != 1) %}
+{% set has_last = (current_page != nb_page) %}
+
+{% if nb_page > 1 %}
+    <div class="pagination">
+        {% if has_before %}
+            <span class=""><a href="{{ path(route_name, {offset: left_page}) }}">&lt;</a></span>
+        {% else %}
+            <span class="p-disable">&lt;</span>
+        {% endif %}
+
+        {% if has_first %}
+            <span><a href="{{ path(route_name, {offset: 1}) }}">1</a></span>
+        {% endif %}
+
+        {% if has_left_eli %}
+            <span class="p-eli">...</span>
+        {% elseif has_second %}
+            <span><a href="{{ path(route_name, {offset: 2}) }}">2</a></span>
+        {% endif %}
+
+        {% if has_left %}
+            <span><a href="{{ path(route_name, {offset: left_page}) }}">{{ left_page }}</a></span>
+        {% endif %}
+
+        <span class="p-active">{{ current_page }}</span>
+
+        {% if has_right %}
+            <span><a href="{{ path(route_name, {offset: right_page}) }}">{{ right_page }}</a></span>
+        {% endif %}
+
+        {% if has_right_eli %}
+            <span class="p-eli">...</span>
+        {% elseif has_before_last %}
+            <span><a href="{{ path(route_name, {offset: (nb_page - 1)}) }}">{{ nb_page - 1 }}</a></span>
+        {% endif %}
+
+        {% if has_last %}
+            <span><a href="{{ path(route_name, {offset: nb_page}) }}">{{ nb_page }}</a></span>
+        {% endif %}
+
+        {% if has_next %}
+            <span><a href="{{ path(route_name, {offset: right_page}) }}">&gt;</a></span>
+        {% else %}
+            <span class="p-disable">&gt;</span>
+        {% endif %}
+    </div>
+{% endif %}
