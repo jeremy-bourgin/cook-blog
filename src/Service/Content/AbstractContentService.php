@@ -128,9 +128,9 @@ abstract class AbstractContentService
 		if ($this->counted === null)
 		{
 			$this->counted = $this->rep->createQueryBuilder('c')
-            ->select('count(c)')
-            ->getQuery()
-            ->getSingleScalarResult();
+            	->select('count(c)')
+            	->getQuery()
+            	->getSingleScalarResult();
 		}
 
 		return $this->counted;

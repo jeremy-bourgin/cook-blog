@@ -1,6 +1,6 @@
 {
-  "build/runtime.js": "/build/runtime.js",
-  "build/script.js": "/build/script.js",
-  "build/style.css": "/build/style.css",
-  "build/vendors~script.js": "/build/vendors~script.js"
+  "build/0.87359fec.js": "/build/0.87359fec.js",
+  "build/runtime.js": "/build/runtime.dca8fcdd.js",
+  "build/script.js": "/build/script.e72b306b.js",
+  "build/style.css": "/build/style.12cf43b0.css"
 }

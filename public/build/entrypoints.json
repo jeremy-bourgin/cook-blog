@@ -2,17 +2,17 @@
   "entrypoints": {
     "script": {
       "js": [
-        "/build/runtime.js",
-        "/build/vendors~script.js",
-        "/build/script.js"
+        "/build/runtime.dca8fcdd.js",
+        "/build/0.87359fec.js",
+        "/build/script.e72b306b.js"
       ]
     },
     "style": {
       "js": [
-        "/build/runtime.js"
+        "/build/runtime.dca8fcdd.js"
       ],
       "css": [
-        "/build/style.css"
+        "/build/style.12cf43b0.css"
       ]
     }
   }

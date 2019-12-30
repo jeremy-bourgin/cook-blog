@@ -2,5 +2,5 @@
 
 {% block body %}
     <p class="text-success">{{ deleted_message }}</p>
-    <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a>
+    <p><a href="{{ path('article', {url: article_url}) }}" class="btn btn-primary">Retour</a></p>
 {% endblock %}

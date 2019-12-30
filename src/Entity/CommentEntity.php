@@ -112,5 +112,4 @@ class CommentEntity
         return $this;
     }
 
-
 }
