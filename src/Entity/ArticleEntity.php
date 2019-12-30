@@ -30,6 +30,8 @@ class ArticleEntity extends ContentEntity implements IFileEntity
     /**
      * @var string
      *
+     * @Assert\NotBlank
+     * @Assert\Length(max=ArticleEntity::SUMMARIZE_MAXLENGTH)
      * @ORM\Column(name="summarize", type="string", length=ArticleEntity::SUMMARIZE_MAXLENGTH, nullable=false)
      */
     private $summarize;

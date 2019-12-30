@@ -4,6 +4,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * ContentEntity
@@ -28,6 +29,8 @@ abstract class ContentEntity
     /**
      * @var string
      *
+     * @Assert\NotBlank
+     * @Assert\Length(max=100)
      * @ORM\Column(name="url", type="string", length=100, nullable=false, unique=true)
      */
 	private $url;
@@ -35,6 +38,8 @@ abstract class ContentEntity
     /**
      * @var string
      *
+     * @Assert\NotBlank
+     * @Assert\Length(max=100)
      * @ORM\Column(name="title", type="string", length=100, nullable=false)
      */
 	private $title;
@@ -42,6 +47,7 @@ abstract class ContentEntity
     /**
      * @var string
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="content", type="text", nullable=false)
      */
 	private $content;

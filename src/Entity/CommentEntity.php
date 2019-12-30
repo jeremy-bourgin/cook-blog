@@ -3,6 +3,8 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * CommentEntity
  *
@@ -28,6 +30,7 @@ class CommentEntity
     /**
      * @var string
      *
+     * @Assert\NotBlank
      * @ORM\Column(name="message", type="text", nullable=false)
      */
 	private $message;
@@ -35,6 +38,8 @@ class CommentEntity
     /**
      * @var string
      *
+     * @Assert\NotBlank
+     * @Assert\Length(max=20)
      * @ORM\Column(name="name", type="string", length=20, nullable=false)
      */
 	private $name;
