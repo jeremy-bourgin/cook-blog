@@ -29,3 +29,4 @@ yarn-error.log
 /public/files/*
 
 !.gitkeep
+!/public/files/article-no-image.png

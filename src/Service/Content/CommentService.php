@@ -20,7 +20,7 @@ class CommentService
 
     public function getByArticle(ArticleEntity $article): array
     {
-        $this->rep->createQueryBuilder('c')
+        $request = $this->rep->createQueryBuilder('c')
             ->where('c.article = :article')
             ->orderBy("c.time", "DESC")
             ->setParameter("article", $article);
