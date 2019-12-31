@@ -3,17 +3,18 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-	<article>
-		<header><h1>{{ article.title }}</h1></header>
-		<aside>posté le {{ article.time|date("m/d/Y") }} par {{article.user.username}}</aside>
-		<div>
-			{{ article.content|raw }}
-		</div>
-		<footer>
-			<div class="comment-form">
-				{% if is_validate %}
-					<p class="text-success">Commentaire posté avec succès</p>
-				{% else %}
+	{% if is_validate %}
+		<p class="text-success">Commentaire posté avec succès</p>
+		<p><a href="{{ path('article', {url: article.url}) }}" class="btn btn-primary">Retour</a></p>
+	{% else %}
+		<article>
+			<header><h1>{{ article.title }}</h1></header>
+			<aside>posté le {{ article.time|date("m/d/Y") }} par {{article.user.username}}</aside>
+			<div>
+				{{ article.content|raw }}
+			</div>
+			<footer>
+				<div class="comment-form">
 					{{ form_start(comment_form, {'method': 'post'}) }}
 						<div class="form-group">
 							{{ form_label(comment_form.name) }}
@@ -31,22 +32,22 @@
 
 						{{ form_rest(comment_form) }}
 					{{ form_end(comment_form) }}
-				{% endif %}
-			</div>
-			<div>
-				{% for c in article.comments %}
-					<div class="comment-header">
-						<span>{{ c.name }}</span>
-						<span>{{ c.time|date("m/d/Y") }}</span>
-						{% if is_granted('ROLE_ADMIN') %}
-							<span><a href="{{ path('admin_comment_delete', {id: c.id}) }}">supprimer</a></span>
-						{% endif %}
-					</div>
-					<div class="comment-message">
-						<p>{{ c.message }}</p>
-					</div>
-				{% endfor %}
-			</div>
-		</footer>
-	</article>
+				</div>
+				<div>
+					{% for c in article.comments %}
+						<div class="comment-header">
+							<span>{{ c.name }}</span>
+							<span>{{ c.time|date("m/d/Y") }}</span>
+							{% if is_granted('ROLE_ADMIN') %}
+								<span><a href="{{ path('admin_comment_delete', {id: c.id}) }}">supprimer</a></span>
+							{% endif %}
+						</div>
+						<div class="comment-message">
+							<p>{{ c.message }}</p>
+						</div>
+					{% endfor %}
+				</div>
+			</footer>
+		</article>
+	{% endif %}
 {% endblock %}
