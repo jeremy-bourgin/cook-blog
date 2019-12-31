@@ -45,7 +45,13 @@
 								<span>{{ c.name }}</span>
 								<span>{{ c.time|date("m/d/Y h:i") }}</span>
 								{% if is_granted('ROLE_ADMIN') %}
-									<span><a href="{{ path('admin_comment_delete', {id: c.id}) }}">supprimer</a></span>
+									<span>
+										<a
+											href="javascript:void(0)"
+                        					onclick="window.display_prompt('Êtes-vous sure de bien vouloir supprimer ce commentaire', '{{ path('admin_comment_delete', {id: c.id}) }}')">
+											supprimer
+										</a>
+									</span>
 								{% endif %}
 							</div>
 							<div>

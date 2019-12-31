@@ -6,14 +6,16 @@
 	{% for o in articles %}
 		{% set is_empty = false %}
 
-		<article class="overflow-auto mb-3 pb-4 article-list">
+		<article class="overflow-auto mb-3 pb-4 article article-list">
 			<header>
 				<h1 class="h3"><a href="{{ path('article', {url: o.url}) }}">{{ o.title }}</a></h1>
 			</header>
-			<p>
-				<img src="{{ asset("files/#{o.filename}") }}" class="summarize-img mr-3" alt="Image résumant l'article">
-				{{ o.summarize }}
-			</p>
+			<div>
+				<p>
+					<img src="{{ asset("files/#{o.filename}") }}" class="summarize-img mr-3" alt="Image résumant l'article">
+					{{ o.summarize }}
+				</p>
+			</div>
 		</article>
 	{% endfor %}
 
