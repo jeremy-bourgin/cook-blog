@@ -115,7 +115,7 @@ abstract class AbstractContentService
 	public function getAll(): array
 	{
 		$request = $this->rep->createQueryBuilder("c");
-		$request->orderBy("c.id", "DESC");
+		$request->addOrderBy("c.id", "DESC");
 		
 		$query = $request->getQuery();
 		$result = $query->getResult();

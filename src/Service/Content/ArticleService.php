@@ -21,6 +21,7 @@ class ArticleService extends AbstractContentService
 		{
 			$request->leftJoin("c.comments", "com");
 			$request->addSelect("com");
+			$request->addOrderBy("com.time", "DESC");
 		}
 
 		if ($with_user)
@@ -41,8 +42,9 @@ class ArticleService extends AbstractContentService
 	protected function createGetAllFromPageRequest(int $page, bool $with_comments = false, bool $with_user = false): QueryBuilder
 	{
 		$request = parent::createGetAllFromPageRequest($page);
+		$request->addOrderBy("c.time", "DESC");
+
 		$this->join($request, $with_comments, $with_user);
-		$request->orderBy("c.time", "DESC");
 
 		return $request;
 	}

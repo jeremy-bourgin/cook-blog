@@ -3,6 +3,8 @@ namespace App\Controller\Content;
 
 use App\Service\Content\ArticleService;
 use App\Service\Content\CommentService;
+use App\Entity\CommentEntity;
+use App\Form\CommentFormType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +27,26 @@ class ArticleController extends AbstractController
     public function index(Request $request, string $url)
     {
         $article = $this->article_service->getByUrl($url);
-        //$comments = $this->comment_service->getByArticle($article);
+
+        $comment = new CommentEntity();
+        $comment->setArticle($article);
+        $comment->setTime(time());
+
+        $comment_form = $this->createForm(CommentFormType::class, $comment);
+        $comment_form->handleRequest($request);
+
+        $is_submited = $comment_form->isSubmitted();
+        $is_validate = $is_submited && $comment_form->isValid();
+
+        if ($is_validate)
+        {
+            $this->comment_service->save($comment);
+        }
 
         return $this->render('content/article.html.twig', array(
-            'article' => $article
+            'article' => $article,
+            'comment_form' => $comment_form->createView(),
+            'is_validate' => $is_validate
         ));
     }
 }

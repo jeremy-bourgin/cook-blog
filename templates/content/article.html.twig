@@ -9,5 +9,44 @@
 		<div>
 			{{ article.content|raw }}
 		</div>
+		<footer>
+			<div class="comment-form">
+				{% if is_validate %}
+					<p class="text-success">Commentaire posté avec succès</p>
+				{% else %}
+					{{ form_start(comment_form, {'method': 'post'}) }}
+						<div class="form-group">
+							{{ form_label(comment_form.name) }}
+							{{ form_widget(comment_form.name, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+							{{ form_errors(comment_form.name) }}
+
+							{{ form_label(comment_form.message) }}
+							{{ form_widget(comment_form.message, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+							{{ form_errors(comment_form.message) }}
+						</div>
+
+						<div>
+							{{ form_widget(comment_form.save, { 'attr': { 'class': 'btn btn-primary px-5' } }) }}
+						</div>
+
+						{{ form_rest(comment_form) }}
+					{{ form_end(comment_form) }}
+				{% endif %}
+			</div>
+			<div>
+				{% for c in article.comments %}
+					<div class="comment-header">
+						<span>{{ c.name }}</span>
+						<span>{{ c.time|date("m/d/Y") }}</span>
+						{% if is_granted('ROLE_ADMIN') %}
+							<span><a href="{{ path('admin_comment_delete', {id: c.id}) }}">supprimer</a></span>
+						{% endif %}
+					</div>
+					<div class="comment-message">
+						<p>{{ c.message }}</p>
+					</div>
+				{% endfor %}
+			</div>
+		</footer>
 	</article>
 {% endblock %}

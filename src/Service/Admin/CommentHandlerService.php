@@ -16,7 +16,7 @@ class CommentHandlerService
 
     public function delete(CommentEntity $comment): void
     {
-        $this->em->remove($o);
+        $this->em->remove($comment);
         $this->em->flush();
     }
 }
