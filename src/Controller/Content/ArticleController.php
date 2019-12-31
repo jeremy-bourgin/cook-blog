@@ -1,10 +1,10 @@
 <?php
 namespace App\Controller\Content;
 
-use App\Service\Content\ArticleService;
-use App\Service\Content\CommentService;
 use App\Entity\CommentEntity;
 use App\Form\CommentFormType;
+use App\Service\Content\ArticleService;
+use App\Service\Content\CommentService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

@@ -39,7 +39,11 @@
 					</div>
 				</div>
 				<div>
+					{% set no_comment = true %}
+
 					{% for c in article.comments %}
+						{% set no_comment = false %}
+
 						<div class="mt-3">
 							<div class="comment-header">
 								<span>{{ c.name }}</span>
@@ -59,6 +63,10 @@
 							</div>
 						</div>
 					{% endfor %}
+
+					{% if no_comment %}
+						<p>Il n'y a pas de commentaire</p>
+					{% endif %}
 				</div>
 			</footer>
 		</article>

@@ -3,18 +3,30 @@
 {% block title %}Hello ContactController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    {% if is_validate %}
+        <p class="text-success">Votre message a bien été envoyé</p>
+        <p><a href="{{ path('index') }}" class="btn btn-primary">Accueil</a></p>
+    {% else %}
+        {{ form_start(form, {'method': 'post'}) }}
+            <div class="form-group">
+                {{ form_label(form.from) }}
+                {{ form_widget(form.from, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+                {{ form_errors(form.from) }}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                {{ form_label(form.object) }}
+                {{ form_widget(form.object, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+                {{ form_errors(form.object) }}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Projets/www/cook-blog/src/Controller/ContactController.php'|file_link(0) }}">src/Controller/ContactController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Projets/www/cook-blog/templates/contact/index.html.twig'|file_link(0) }}">templates/contact/index.html.twig</a></code></li>
-    </ul>
-</div>
+                {{ form_label(form.message) }}
+                {{ form_widget(form.message, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+                {{ form_errors(form.message) }}
+            </div>
+
+            <div>
+                {{ form_widget(form.save, { 'attr': { 'class': 'btn btn-primary px-5' } }) }}
+            </div>
+
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
+    {% endif %}
 {% endblock %}
