@@ -11,14 +11,15 @@ class MailerService
 
     private $mailer;
 
-    public function __construct(\Swift_Mailer $mailer)
+    public function __construct(Swift_Mailer $mailer)
     {
         $this->mailer = $mailer;
     }
 
     public function sendMail(string $from, string $object, string $message, string $type = self::DEFAULT_TYPE, string $to = self::ADMIN_MAIL): void
     {
-        $message = (new Swift_Message($object))
+        $message = (new Swift_Message())
+            ->setSubject($object)
             ->setFrom($from)
             ->setTo($to)
             ->setBody($message, $type);

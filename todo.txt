@@ -1,7 +1,6 @@
-1. contact
-2. gestion erreur (affichage 404 403 500... + exception)
-3. ajout et utilisation de configuration (command)
-4. restriction url parameter (int)
-5. design
-6. traduction (template + controller error + exception)
-7. readme
+1. gestion erreur (affichage 404 403 500... + exception)
+2. ajout et utilisation de configuration (command)
+3. restriction url parameter (int)
+4. design
+5. traduction (template + controller error + exception)
+6. readme
