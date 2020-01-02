@@ -1,6 +1,5 @@
-1. gestion erreur (affichage 404 403 500... + exception)
+1. restriction url parameter (int)
 2. ajout et utilisation de configuration (command)
-3. restriction url parameter (int)
-4. design
-5. traduction (template + controller error + exception)
-6. readme
+3. design
+4. traduction (template + controller error + exception)
+5. readme
