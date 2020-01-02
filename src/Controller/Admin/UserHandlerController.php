@@ -26,7 +26,11 @@ class UserHandlerController extends AbstractController
     }
 
     /**
-     * @Route("%admin_path%/user", name="admin_user_index")
+     * @Route(
+     *  "%admin_path%/user",
+     *  name="admin_user_index",
+     *  methods={"GET"},
+     * )
      */
     public function index()
     {
@@ -38,7 +42,11 @@ class UserHandlerController extends AbstractController
     }
 
     /**
-     * @Route("%admin_path%/user/add", name="admin_user_add")
+     * @Route(
+     *  "%admin_path%/user/add",
+     *  name="admin_user_add",
+     *  methods={"GET", "POST"},
+     * )
      */
     public function add(Request $request)
     {
@@ -66,7 +74,12 @@ class UserHandlerController extends AbstractController
     }
 
     /**
-     * @Route("%admin_path%/user/delete/{id}", name="admin_user_delete")
+     * @Route(
+     *  "%admin_path%/user/delete/{id}",
+     *  name="admin_user_delete",
+     *  methods={"GET"},
+     *  requirements={"id"="\d+"}
+     * )
      */
     public function delete(int $id)
     {

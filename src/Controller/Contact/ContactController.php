@@ -19,7 +19,11 @@ class ContactController extends AbstractController
     }
 
     /**
-     * @Route("/contact", name="contact", methods={"GET", "POST"})
+     * @Route(
+     *  "/contact",
+     *  name="contact",
+     *  methods={"GET", "POST"}
+     * )
      */
     public function index(Request $request)
     {

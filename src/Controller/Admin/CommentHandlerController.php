@@ -17,7 +17,12 @@ class CommentHandlerController extends AbstractController
     }
 
     /**
-     * @Route("%admin_path%/comment/delete/{id}", name="admin_comment_delete")
+     * @Route(
+     *  "%admin_path%/comment/delete/{id}",
+     *  name="admin_comment_delete",
+     *  methods={"GET"},
+     *  requirements={"id"="\d+"}
+     * )
      */
     public function delete(CommentEntity $comment)
     {

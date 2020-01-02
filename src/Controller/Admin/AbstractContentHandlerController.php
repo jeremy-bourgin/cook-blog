@@ -11,6 +11,13 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractContentHandlerController extends AbstractController
 {
+    protected $content_handler_service;
+
+    public function __construct(AbstractContentHandlerService $content_handler_service)
+    {
+        $this->content_handler_service = $content_handler_service;
+    }
+
     public function indexHandler(array $contents, string $update_path_name, string $delete_path_name)
     {
         return $this->render('admin/content/index.html.twig', array(
@@ -20,7 +27,7 @@ abstract class AbstractContentHandlerController extends AbstractController
         ));
     }
 
-    public function formHandler(Request $request, AbstractContentHandlerService $content_handler_service, Form $form)
+    public function formHandler(Request $request, Form $form)
     {
         $form->handleRequest($request);
 
@@ -30,7 +37,7 @@ abstract class AbstractContentHandlerController extends AbstractController
         if ($is_validate)
         {
             $data = $form->getData();
-            $content_handler_service->save($data);
+            $this->content_handler_service->save($data);
         }
 
         return array(
@@ -40,16 +47,16 @@ abstract class AbstractContentHandlerController extends AbstractController
         );
     }
 
-    public function deleteHandler(AbstractContentHandlerService $content_handler_service, ContentEntity $content)
+    public function deleteHandler(ContentEntity $content)
     {
-        $content_handler_service->delete($content);
+        $this->content_handler_service->delete($content);
 
         return $this->render('admin/content/content_delete.html.twig', array(
             'deleted_message' => $this->getDeletedMessage()
         ));
     }
 
-    public abstract function getValidateMessage(): string;
+    protected abstract function getValidateMessage(): string;
 
-    public abstract function getDeletedMessage(): string;
+    protected abstract function getDeletedMessage(): string;
 }

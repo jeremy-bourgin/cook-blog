@@ -22,7 +22,11 @@ class ConfigHandlerController extends AbstractController
     }
 
     /**
-     * @Route("%admin_path%/config/update/{id}", name="config_update")
+     * @Route(
+     *  "%admin_path%/config/update/{id}",
+     *  name="config_update",
+     *  methods={"GET", "POST"}
+     * )
      */
     public function update(Request $request, string $id)
     {

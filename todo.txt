@@ -1,5 +1,5 @@
-1. restriction url parameter (int)
-2. ajout et utilisation de configuration (command)
-3. design
-4. traduction (template + controller error + exception)
-5. readme
+1. ajout et utilisation de configuration (command)
+2. design
+3. traduction (template + controller error + exception)
+4. readme
+5. contenu

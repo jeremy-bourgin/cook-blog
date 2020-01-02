@@ -15,15 +15,17 @@ class PageHandlerController extends AbstractContentHandlerController
 {
     use AllPagesSubscriberTrait;
 
-    private $page_handler_service;
-
     public function __construct(PageHandlerService $page_handler_service)
     {
-        $this->page_handler_service = $page_handler_service;
+        parent::__construct($page_handler_service);
     }
 
     /**
-     * @Route("%admin_path%/page/", name="admin_page_index")
+     * @Route(
+     *  "%admin_path%/page/",
+     *  name="admin_page_index",
+     *  methods={"GET"}
+     * )
      */
     public function index()
     {
@@ -35,17 +37,13 @@ class PageHandlerController extends AbstractContentHandlerController
             'admin_page_delete'
         );
     }
-
-    public function form(Request $request, PageEntity $page)
-    {
-        $form = $this->createForm(ContentForm::class, $page);
-        $render_vars = parent::formHandler($request, $this->page_handler_service, $form);
-
-        return $this->render('admin/content/content_form.html.twig', $render_vars);
-    }
     
     /**
-     * @Route("%admin_path%/page/add", name="admin_page_add")
+     * @Route(
+     *  "%admin_path%/page/add",
+     *  name="admin_page_add",
+     *  methods={"GET", "POST"}
+     * )
      */
     public function add(Request $request)
     {
@@ -55,7 +53,12 @@ class PageHandlerController extends AbstractContentHandlerController
     }
 
     /**
-     * @Route("%admin_path%/page/update/{id}", name="admin_page_update")
+     * @Route(
+     *  "%admin_path%/page/update/{id}",
+     *  name="admin_page_update",
+     *  methods={"GET", "POST"},
+     *  requirements={"id"="\d+"}
+     * )
      */
     public function update(Request $request, PageEntity $page)
     {
@@ -63,20 +66,33 @@ class PageHandlerController extends AbstractContentHandlerController
     }
 
     /**
-     * @Route("%admin_path%/page/delete/{id}", name="admin_page_delete")
+     * @Route(
+     *  "%admin_path%/page/delete/{id}",
+     *  name="admin_page_delete",
+     *  methods={"GET"},
+     *  requirements={"id"="\d+"}
+     * )
      */
     public function delete(PageEntity $page)
     {
-        return parent::deleteHandler($this->page_handler_service, $page);
+        return parent::deleteHandler($page);
     }
 
-    public function getValidateMessage(): string
+    protected function getValidateMessage(): string
     {
         return "La page a bien été enregistré";
     }
 
-    public function getDeletedMessage(): string
+    protected function getDeletedMessage(): string
     {
         return "La page a bien été supprimé";
+    }
+
+    protected function form(Request $request, PageEntity $page)
+    {
+        $form = $this->createForm(ContentForm::class, $page);
+        $render_vars = parent::formHandler($request, $form);
+
+        return $this->render('admin/content/content_form.html.twig', $render_vars);
     }
 }

@@ -16,7 +16,11 @@ class PageController extends AbstractController
     }
 
     /**
-     * @Route("/page/{url}", name="page")
+     * @Route(
+     *  "/page/{url}",
+     *  name="page",
+     *  methods={"GET"}
+     * )
      */
     public function index(string $url)
     {

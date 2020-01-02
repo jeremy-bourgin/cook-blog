@@ -16,8 +16,17 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/", name="index")
-     * @Route("/p/{offset}", name="index_pagined")
+     * @Route(
+     *  "/",
+     *  name="index",
+     *  methods={"GET"}
+     * )
+     * 
+     * @Route(
+     *  "/p/{offset}",
+     *  name="index_pagined",
+     *  methods={"GET"}
+     * )
      */
     public function index(int $offset=1)
     {
