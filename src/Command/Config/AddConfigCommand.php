@@ -1,8 +1,8 @@
 <?php
 namespace App\Command\Config;
 
-use App\Service\Admin\ConfigHandlerService;
 use App\Entity\ConfigEntity;
+use App\Service\Admin\ConfigHandlerService;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Style\SymfonyStyle;

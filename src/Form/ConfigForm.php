@@ -27,7 +27,9 @@ class ConfigForm extends AbstractType
         }
 
         $builder
-        	->add('name', TextType::class)
+        	->add('name', TextType::class, array(
+                'disabled' => true
+            ))
             ->add('raw_value', $type, $choices)
             ->add('save', SubmitType::class);
     }

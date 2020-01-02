@@ -28,7 +28,6 @@ class ConfigHandlerService
         
         $o->setValue($value);
         $o->setFullName($full_name);
-        $o->setDescription($desc);
 
         $this->save($o);
     }

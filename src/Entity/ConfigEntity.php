@@ -56,7 +56,7 @@ class ConfigEntity
      * @ORM\Column(name="type", type="integer", nullable=false, options={"default" : 2})
      * @Assert\LessThanOrEqual(2)
      */
-    private $type;
+    private $type = 2;
 
     public static function stringToType(string $type_name): int
     {
@@ -92,15 +92,15 @@ class ConfigEntity
     {
         switch($this->type)
         {
-            case "bool":
+            case self::BOOL_TYPE:
                 $r = ChoiceType::class;
             break;
 
-            case "int":
+            case self::INT_TYPE:
                 $r = IntegerType::class;
             break;
 
-            case "string":
+            case self::STRING_TYPE:
                 $r = TextType::class;
             break;
 
@@ -134,18 +134,18 @@ class ConfigEntity
         return $r;
     }
 
-    public function setValue(string $value): self
+    public function setValue(string $raw_value): self
     {
         if ($this->type === self::BOOL_TYPE && $raw_value !== "0" && $raw_value !== "1")
         {
-            throw new InvalidConfigException();
+            throw new InvalidConfigException($this->name);
         }
-        else if ($this->type === self::INT_TYPE && !is_numeric($this->raw_value))
+        else if ($this->type === self::INT_TYPE && !is_numeric($raw_value))
         {
-            throw new InvalidConfigException();
+            throw new InvalidConfigException($this->name);
         }
 
-        return $this->setRawValue($value);
+        return $this->setRawValue($raw_value);
     }
 
     public function getName(): ?string

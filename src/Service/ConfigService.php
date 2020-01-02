@@ -32,10 +32,15 @@ class ConfigService
 			$this->map_config[$name] = $i;
 		}
 	}
+
+	public function hasConfig(string $name): bool
+	{
+		return (array_key_exists($name, $this->map_config));
+	}
 	
 	public function getConfigEntityByName(string $name): ConfigEntity
 	{
-		if (!array_key_exists($name, $this->map_config))
+		if (!$this->hasConfig($name))
 		{
 			throw new ConfigNotFoundException($name);
 		}
@@ -55,7 +60,7 @@ class ConfigService
 	
 	public function getConfigValue(string $name): string
 	{
-		if (!array_key_exists($name, $this->all_config))
+		if (!$this->hasConfig($name))
 		{
 			throw new ConfigNotFoundException($name);
 		}
