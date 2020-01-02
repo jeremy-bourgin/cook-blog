@@ -2,7 +2,7 @@
 namespace App\Service\Content;
 
 use App\Entity\ContentEntity;
-use App\Exception\ContentNotFoundException;
+use App\Exception\Content\ContentNotFoundException;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Doctrine\ORM\EntityManagerInterface;

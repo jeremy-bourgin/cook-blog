@@ -1,9 +1,9 @@
 <?php
-namespace App\Exception;
+namespace App\Exception\Content;
 
-use Exception;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-class ContentNotFoundException extends Exception
+class ContentNotFoundException extends NotFoundHttpException
 {
 	const MESSAGE = "Le contenu que vous souhaitez consulter n'existe pas.";
 	
