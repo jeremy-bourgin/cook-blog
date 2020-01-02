@@ -3,6 +3,7 @@ namespace App\Controller\Contact;
 
 use App\Entity\ContactEntity;
 use App\Form\ContactFormType;
+use App\Service\ConfigService;
 use App\Service\MailerService;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,10 +12,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
+    private $config_service;
     private $mailer_service;
 
-    public function __construct(MailerService $mailer_service)
+    public function __construct(ConfigService $config_service, MailerService $mailer_service)
     {
+        $this->config_service = $config_service;
         $this->mailer_service = $mailer_service;
     }
 
@@ -27,6 +30,11 @@ class ContactController extends AbstractController
      */
     public function index(Request $request)
     {
+        if (!$this->config_service->getConfigValue('contact_enable'))
+        {
+            throw $this->createNotFoundException();
+        }
+
         $contact = new ContactEntity();
 
         $form = $this->createForm(ContactFormType::class, $contact);
@@ -39,6 +47,7 @@ class ContactController extends AbstractController
         {
             $this->mailer_service->sendMail(
                 $contact->getFrom(),
+                $this->config_service->getConfigValue('contact_email'),
                 $contact->getObject(),
                 $contact->getMessage()
             );

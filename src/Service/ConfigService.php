@@ -58,7 +58,7 @@ class ConfigService
 		return $this->config_entity;
 	}
 	
-	public function getConfigValue(string $name): string
+	public function getConfigValue(string $name)
 	{
 		if (!$this->hasConfig($name))
 		{

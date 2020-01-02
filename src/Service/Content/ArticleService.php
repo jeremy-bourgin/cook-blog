@@ -39,9 +39,9 @@ class ArticleService extends AbstractContentService
 		return $request;
 	}
 
-	protected function createGetAllFromPageRequest(int $page, bool $with_comments = false, bool $with_user = false): QueryBuilder
+	protected function createGetAllFromPageRequest(int $page, int $limit, bool $with_comments = false, bool $with_user = false): QueryBuilder
 	{
-		$request = parent::createGetAllFromPageRequest($page);
+		$request = parent::createGetAllFromPageRequest($page, $limit);
 		$request->addOrderBy("c.time", "DESC");
 
 		$this->join($request, $with_comments, $with_user);

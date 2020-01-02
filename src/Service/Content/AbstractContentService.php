@@ -9,9 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 
 abstract class AbstractContentService
-{
-	const LIMIT_PAGE = 4;
-	
+{	
 	protected $em;
 	protected $rep;
 
@@ -23,10 +21,10 @@ abstract class AbstractContentService
 		$this->rep = $rep;
 	}
 	
-	protected function paginedRequest(QueryBuilder $request, int $page): void
+	protected function paginedRequest(QueryBuilder $request, int $page, int $limit): void
 	{
-		$request->setFirstResult(self::LIMIT_PAGE * $page);
-		$request->setMaxResults(self::LIMIT_PAGE);
+		$request->setFirstResult($limit * $page);
+		$request->setMaxResults($limit);
 	}
 
 	protected function idFilterRequest(QueryBuilder $request, int $id): void
@@ -64,10 +62,10 @@ abstract class AbstractContentService
 		return $request;
 	}
 	
-	protected function createGetAllFromPageRequest(int $page): QueryBuilder
+	protected function createGetAllFromPageRequest(int $page, int $limit): QueryBuilder
 	{
 		$request = $this->createGetRequest();
-		$this->paginedRequest($request, $page);
+		$this->paginedRequest($request, $page, $limit);
 		
 		return $request;
 	}
@@ -102,9 +100,9 @@ abstract class AbstractContentService
 		return $result;
 	}
 	
-	public function getAllFromPage(int $page): array
+	public function getAllFromPage(int $page, int $limit): array
 	{
-		$request = $this->createGetAllFromPageRequest($page);
+		$request = $this->createGetAllFromPageRequest($page, $limit);
 		
 		$query = $request->getQuery();
 		$result = $query->getResult();
@@ -123,7 +121,7 @@ abstract class AbstractContentService
 		return $result;
 	}
 
-	public function count(): int
+	public function countAll(): int
 	{
 		if ($this->counted === null)
 		{
@@ -134,13 +132,5 @@ abstract class AbstractContentService
 		}
 
 		return $this->counted;
-	}
-
-	public function getNbPage(): int
-	{
-		$count = $this->count();
-		$nb_page = ceil($count / self::LIMIT_PAGE);
-
-		return $nb_page;
 	}
 }

@@ -5,6 +5,8 @@
         <p class="text-success">Votre message a bien été envoyé</p>
         <p><a href="{{ path('index') }}" class="btn btn-primary">Accueil</a></p>
     {% else %}
+        <h1>Contactez-nous</h1>
+
         {{ form_start(form, {'method': 'post'}) }}
             <div class="form-group">
                 {{ form_label(form.from) }}

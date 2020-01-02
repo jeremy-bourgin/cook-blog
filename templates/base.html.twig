@@ -38,7 +38,9 @@
 					<a href="{{ path('page', {'url': p.url}) }}" class="nav-item nav-link">{{ p.title }}</a>
 				{% endfor %}
 
-				<a href="{{ path('contact') }}" class="nav-item nav-link">Contact</a>
+				{% if global_config['contact_enable'] %}
+					<a href="{{ path('contact') }}" class="nav-item nav-link">Contact</a>
+				{% endif %}
 
 				{% if is_granted('ROLE_ADMIN') %}
 					<a href="{{ path('cblog_admin') }}" class="nav-item nav-link">Panel admin</a>

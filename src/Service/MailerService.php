@@ -6,7 +6,6 @@ use Swift_Message;
 
 class MailerService
 {
-    const ADMIN_MAIL = 'jeremy.bourgin@etu.umontpellier.fr';
     const DEFAULT_TYPE = 'text/plain';
 
     private $mailer;
@@ -16,7 +15,7 @@ class MailerService
         $this->mailer = $mailer;
     }
 
-    public function sendMail(string $from, string $object, string $message, string $type = self::DEFAULT_TYPE, string $to = self::ADMIN_MAIL): void
+    public function sendMail(string $from, string $to, string $object, string $message, string $type = self::DEFAULT_TYPE): void
     {
         $message = (new Swift_Message())
             ->setSubject($object)
