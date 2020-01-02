@@ -3,12 +3,12 @@
 {% block body %}
 
     {% if (status_code == 404) or (status_code == 403) %}
-        <h1 class="text-error">Erreur {{ status_code }}</h1>
+        <h1 class="text-error mb-3">Erreur {{ status_code }}</h1>
         <p>{{ status_text }}</p>
     {% else %}
-        <p class="text-error">Une erreur est survenue</p>
+        <h1 class="text-error mb-3">Une erreur est survenue</h1>
     {% endif %}
 
-    <p><a href="{{ path('index') }}">Retour à l'accueil</a>
+    <a href="{{ path('index') }}">Retour à l'accueil</a>
 
 {% endblock %}
