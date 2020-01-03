@@ -19,8 +19,12 @@
 	<div class="col-xl-8 p-5 rounded">
 		<p id="prompt_message_text"></p>
 		<div>
-			<a href="#" id="prompt_message_submit" class="btn btn-primary">Valider</a>
-			<button class="btn btn-secondary" id="prompt_message_cancel">Annuler</button>
+			<a href="#" id="prompt_message_submit" class="btn btn-primary">
+				{% trans from 'base' %}prompt_validate{% endtrans %}
+			</a>
+			<button class="btn btn-secondary" id="prompt_message_cancel">
+				{% trans from 'base' %}prompt_cancel{% endtrans %}
+			</button>
 		</div>
 	</div>
 </div>
@@ -32,22 +36,32 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<div class="navbar-nav">
-				<a href="/" class="nav-item nav-link">Accueil</a>
+				<a href="/" class="nav-item nav-link">
+					{% trans from 'base' %}index{% endtrans %}
+				</a>
 				
 				{% for p in global_pages %}
-					<a href="{{ path('page', {'url': p.url}) }}" class="nav-item nav-link">{{ p.title }}</a>
+					<a href="{{ path('page', {'url': p.url}) }}" class="nav-item nav-link">
+						{{ p.title }}
+					</a>
 				{% endfor %}
 
 				{% if global_config['contact_enable'] %}
-					<a href="{{ path('contact') }}" class="nav-item nav-link">Contact</a>
+					<a href="{{ path('contact') }}" class="nav-item nav-link">
+						{% trans from 'base' %}contact{% endtrans %}
+					</a>
 				{% endif %}
 
 				{% if is_granted('ROLE_ADMIN') %}
-					<a href="{{ path('cblog_admin') }}" class="nav-item nav-link">Panel admin</a>
+					<a href="{{ path('cblog_admin') }}" class="nav-item nav-link">
+						{% trans from 'base' %}admin{% endtrans %}
+					</a>
 				{% endif %}
 
 				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-					<a href="{{ path('fos_user_security_logout') }}" class="nav-item nav-link">Déconnexion</a>
+					<a href="{{ path('fos_user_security_logout') }}" class="nav-item nav-link">
+						{% trans from 'base' %}disconnect{% endtrans %}
+					</a>
 				{% endif %}
 			</div>
 		</div>

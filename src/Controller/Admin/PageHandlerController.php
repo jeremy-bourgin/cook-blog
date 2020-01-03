@@ -80,12 +80,12 @@ class PageHandlerController extends AbstractContentHandlerController
 
     protected function getValidateMessage(): string
     {
-        return "La page a bien été enregistré";
+        return "page_save_success";
     }
 
     protected function getDeletedMessage(): string
     {
-        return "La page a bien été supprimé";
+        return "page_delete_success";
     }
 
     protected function form(Request $request, PageEntity $page)

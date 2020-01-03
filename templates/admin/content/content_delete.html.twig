@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p class="text-success">{{ deleted_message }}</p>
-    <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a></p>
+    <p class="text-success">{{ deleted_message|trans({}, 'content') }}</p>
+    <a href="{{ path('cblog_admin') }}" class="btn btn-primary">
+        {% trans from 'content' %}back{% endtrans %}
+    </a>
 {% endblock %}

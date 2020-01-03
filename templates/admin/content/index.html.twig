@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a>
+    <a href="{{ path('cblog_admin') }}" class="btn btn-primary">{% trans from 'content' %}back{% endtrans %}</a>
 
     {% include '/includes/content_handler.html.twig' with {
         'array': contents,

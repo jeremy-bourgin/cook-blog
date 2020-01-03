@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p class="text-success">L'utilisateur a été supprimé avec succès</p>
+    <p class="text-success">{% trans from "user" %}delete_success{% endtrans %}</p>
+    <a href="{{ path('cblog_admin') }}" class="btn btn-primary">
+        {% trans from 'user' %}back{% endtrans %}
+    </a>
 {% endblock %}

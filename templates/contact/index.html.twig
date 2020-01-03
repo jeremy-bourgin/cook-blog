@@ -2,10 +2,10 @@
 
 {% block body %}
     {% if is_validate %}
-        <p class="text-success">Votre message a bien été envoyé</p>
-        <p><a href="{{ path('index') }}" class="btn btn-primary">Accueil</a></p>
+        <p class="text-success">{% trans from 'contact' %}success{% endtrans %}</p>
+        <p><a href="{{ path('index') }}" class="btn btn-primary">{% trans from 'contact' %}back{% endtrans %}</a></p>
     {% else %}
-        <h1>Contactez-nous</h1>
+        <h1>{% trans from 'contact' %}title{% endtrans %}</h1>
 
         {{ form_start(form, {'method': 'post'}) }}
             <div class="form-group">

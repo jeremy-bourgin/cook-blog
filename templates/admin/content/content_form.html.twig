@@ -3,8 +3,8 @@
 {% block body %}
 
     {% if is_validate %}
-        <p class="text-success">{{ validate_message }}</p>
-        <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a>
+        <p class="text-success">{{ validate_message|trans({}, 'content') }}</p>
+        <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">{% trans from 'content' %}back{% endtrans %}</a>
     {% else %}
         {{ form_start(form, {'method': 'post'}) }}
             <div class="mb-5">

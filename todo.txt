@@ -1,5 +1,4 @@
-1. ajout et utilisation de configuration (command)
-2. design
-3. traduction (template + controller error + exception)
-4. readme
-5. contenu
+1. traduction (template + controller error + exception)
+2. design (+ pagination)
+3. readme
+4. contenu

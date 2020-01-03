@@ -2,7 +2,10 @@
 
 {% block body %}
     {% if is_validate %}
-        <p class="text-success">L'utilisateur a bien été enregistré</p>
+        <p class="text-success">{% trans from "user" %}add_success{% endtrans %}</p>
+        <a href="{{ path('cblog_admin') }}" class="btn btn-primary">
+            {% trans from 'user' %}back{% endtrans %}
+        </a>
     {% else %}
         {{ parent() }}
     {% endif %}

@@ -1,6 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p class="text-success">Le commentaire a bien été supprimé</p>
-    <p><a href="{{ path('article', {url: article_url}) }}" class="btn btn-primary">Retour</a></p>
+    <p class="text-success">
+        {% trans from 'content' %}comment_delete_success{% endtrans %}
+    </p>
+    <p>
+        <a href="{{ path('article', {url: article_url}) }}" class="btn btn-primary">
+            {% trans from 'content' %}back{% endtrans %}
+        </a>
+    </p>
 {% endblock %}

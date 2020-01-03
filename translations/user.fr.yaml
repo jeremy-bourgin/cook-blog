@@ -1,0 +1,6 @@
+Roles: 'Rôles'
+admin: 'Administrateur'
+user: 'Utilisateur'
+back: 'Retour'
+add_success: "L'utilisateur a bien été enregistré"
+delete_success: "L'utilisateur a été supprimé avec succès"

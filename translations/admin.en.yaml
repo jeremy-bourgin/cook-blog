@@ -1,0 +1,13 @@
+config: "Configuration"
+
+handling_user: "User Management"
+add_user: "Add an user"
+handle_user: "Manage users"
+
+handling_article: "Article Management"
+add_article: "Add an article"
+handle_article: "Manage articles"
+
+handling_page: "Page Management"
+add_page: "Add a page"
+handle_page: "Manage pages"

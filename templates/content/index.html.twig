@@ -20,7 +20,7 @@
 	{% endfor %}
 
 	{% if is_empty %}
-		<p class="text-error">Il n'y a aucun article</p>
+		<p class="text-error">{% trans from 'content' %}no_article{% endtrans %}</p>
 	{% endif %}
 
 	{% include '/includes/pagination.html.twig' with {

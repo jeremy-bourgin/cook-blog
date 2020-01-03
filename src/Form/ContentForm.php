@@ -26,7 +26,7 @@ class ContentForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'translation_domain' => 'content_form'
+            'translation_domain' => 'content'
         ));
     }
 

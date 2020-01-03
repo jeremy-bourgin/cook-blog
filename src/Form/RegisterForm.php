@@ -7,6 +7,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class RegisterForm extends AbstractType
@@ -50,6 +51,13 @@ class RegisterForm extends AbstractType
                 'multiple' => true,
                 'required' => true,
             ));
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'translation_domain' => 'user'
+        ));
     }
 
     public function getParent()

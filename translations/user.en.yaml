@@ -1,0 +1,6 @@
+Roles: 'Roles'
+admin: 'Administrator'
+user: 'User'
+back: 'Back'
+add_success: "The user has been added successfully"
+delete_success: "The user has been deleted successfully"

@@ -82,12 +82,12 @@ class ArticleHandlerController extends AbstractContentHandlerController
 
     protected function getValidateMessage(): string
     {
-        return "L'article a bien été enregistré";
+        return "article_save_success";
     }
 
     protected function getDeletedMessage(): string
     {
-        return "L'article a bien été supprimé";
+        return "article_delete_success";
     }
 
     protected function form(Request $request, ArticleEntity $article)

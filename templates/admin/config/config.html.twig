@@ -3,10 +3,27 @@
 {% block body %}
 
     {% if is_validate %}
-        <p class="text-success">La configuration a bien été modifié</p>
-        <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">Retour</a>
+        <p class="text-success">{% trans from 'config' %}update_success{% endtrans %}</p>
+        <p><a href="{{ path('cblog_admin') }}" class="btn btn-primary">{% trans from 'config' %}back{% endtrans %}</a>
     {% else %}
-    	{{ form(form) }}
+        {{ form_start(form, {'method': 'post'}) }}
+            <div class="form-group">
+                {{ form_label(form.name) }}
+                {{ form_widget(form.name, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.raw_value) }}
+                {{ form_widget(form.raw_value, { 'attr': { 'class': 'form-control col-xl-8' } }) }}
+                {{ form_errors(form.raw_value) }}
+            </div>
+
+            <div>
+                {{ form_widget(form.save, { 'attr': { 'class': 'btn btn-primary px-5' } }) }}
+            </div>
+
+            {{ form_rest(form) }}
+        {{ form_end(form) }}
     {% endif %}
 
 {% endblock %}

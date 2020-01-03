@@ -1,0 +1,13 @@
+config: "Configuration"
+
+handling_user: "Gestion des utilisateurs"
+add_user: "Ajouter un utilisateur"
+handle_user: "Gérer les utilisateurs"
+
+handling_article: "Gestion des articles"
+add_article: "Créer un article"
+handle_article: "Gérer les articles"
+
+handling_page: "Gestion des pages"
+add_page: "Créer une page"
+handle_page: "Gérer les pages"

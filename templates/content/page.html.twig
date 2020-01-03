@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PageController!{% endblock %}
+{% block title %}{{ parent() }} - {{ page.title }}{% endblock %}
 
 {% block body %}
     <article class="article">

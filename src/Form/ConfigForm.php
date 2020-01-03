@@ -37,7 +37,7 @@ class ConfigForm extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'translation_domain' => 'config_form'
+            'translation_domain' => 'config'
         ));
     }
 }
