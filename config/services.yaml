@@ -5,7 +5,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     admin_path: /c05f5b3e/admin
-    app.supported_locales: ['en', 'fr']
 
 services:
     # default configuration for services in *this* file
@@ -31,7 +30,6 @@ services:
 
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
-        public: false
         tags:
             - { name: twig.extension }
 
