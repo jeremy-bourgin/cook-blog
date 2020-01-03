@@ -8,7 +8,7 @@ DirectoryIndex index.php
 # clickbait protection
 <IfModule mod_headers.c>
 	# désactiver les frame et object sur le site et les frames du site provenant d'autre site
-	Header add Content-Security-Policy "object-src 'none'; frame-src 'none'; frame-ancestors 'none';"
+	Header add X-Frame-Options deny
 	# protection sur les types MIME
 	Header add X-Content-Type-Options "nosniff"
 	Header add Access-Control-Allow-Methods "GET, POST"
