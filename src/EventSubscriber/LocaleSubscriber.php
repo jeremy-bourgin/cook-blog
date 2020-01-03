@@ -6,30 +6,35 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
+use Twig\Environment;
+
 class LocaleSubscriber implements EventSubscriberInterface
 {
 	const LANG_PARAM = 'lang';
 
 	private $session;
+	private $twig;
 	
-	public function __construct(SessionInterface $session)
+	public function __construct(SessionInterface $session, Environment $twig)
 	{
 		$this->session = $session;
+		$this->twig = $twig;
 	}
 	
 	public function onKernelRequest(RequestEvent $event)
 	{
         $request = $event->getRequest();
         $lang_selected = $request->getLocale();
-        $query = $request->query;
+		$query = $request->query;
+		
+		$langs = array(
+			'fr',
+			'en'
+		);
         
 		if ($query->has(self::LANG_PARAM))
 		{
 			$temp_lang = $query->get(self::LANG_PARAM);
-			$langs = array(
-				'fr',
-				'en'
-			);
 
 			if (in_array($temp_lang, $langs))
 			{
@@ -43,6 +48,8 @@ class LocaleSubscriber implements EventSubscriberInterface
 		}
 
 		$request->setLocale($lang_selected);
+
+		$this->twig->addGlobal("global_langs", $langs);
 	}
 	
     public static function getSubscribedEvents()

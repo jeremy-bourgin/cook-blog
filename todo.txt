@@ -1,4 +1,3 @@
-1. traduction (template + controller error + exception)
-2. design (+ pagination)
-3. readme
-4. contenu
+1. design (+ pagination)
+2. readme
+3. contenu
