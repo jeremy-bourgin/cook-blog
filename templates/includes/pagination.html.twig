@@ -17,47 +17,47 @@
 {% set has_last = (current_page != nb_page) %}
 
 {% if nb_page > 1 %}
-    <div class="pagination">
+    <div class="pagination rounded justify-content-center">
         {% if has_before %}
-            <span class=""><a href="{{ path(route_name, {offset: left_page}) }}">&lt;</a></span>
+            <span class=""><a href="{{ path(route_name, {offset: left_page}) }}" class="p-text">&lt;</a></span>
         {% else %}
-            <span class="p-disable">&lt;</span>
+            <span class="p-text">&lt;</span>
         {% endif %}
 
         {% if has_first %}
-            <span><a href="{{ path(route_name, {offset: 1}) }}">1</a></span>
+            <span><a href="{{ path(route_name, {offset: 1}) }}" class="p-text">1</a></span>
         {% endif %}
 
         {% if has_left_eli %}
-            <span class="p-eli">...</span>
+            <span class="p-text">...</span>
         {% elseif has_second %}
-            <span><a href="{{ path(route_name, {offset: 2}) }}">2</a></span>
+            <span><a href="{{ path(route_name, {offset: 2}) }}" class="p-text">2</a></span>
         {% endif %}
 
         {% if has_left %}
-            <span><a href="{{ path(route_name, {offset: left_page}) }}">{{ left_page }}</a></span>
+            <span><a href="{{ path(route_name, {offset: left_page}) }}" class="p-text">{{ left_page }}</a></span>
         {% endif %}
 
-        <span class="p-active">{{ current_page }}</span>
+        <span class="p-text">{{ current_page }}</span>
 
         {% if has_right %}
-            <span><a href="{{ path(route_name, {offset: right_page}) }}">{{ right_page }}</a></span>
+            <span><a href="{{ path(route_name, {offset: right_page}) }}" class="p-text">{{ right_page }}</a></span>
         {% endif %}
 
         {% if has_right_eli %}
-            <span class="p-eli">...</span>
+            <span class="p-text">...</span>
         {% elseif has_before_last %}
-            <span><a href="{{ path(route_name, {offset: (nb_page - 1)}) }}">{{ nb_page - 1 }}</a></span>
+            <span><a href="{{ path(route_name, {offset: (nb_page - 1)}) }}" class="p-text">{{ nb_page - 1 }}</a></span>
         {% endif %}
 
         {% if has_last %}
-            <span><a href="{{ path(route_name, {offset: nb_page}) }}">{{ nb_page }}</a></span>
+            <span><a href="{{ path(route_name, {offset: nb_page}) }}" class="p-text">{{ nb_page }}</a></span>
         {% endif %}
 
         {% if has_next %}
-            <span><a href="{{ path(route_name, {offset: right_page}) }}">&gt;</a></span>
+            <span><a href="{{ path(route_name, {offset: right_page}) }}" class="p-text">&gt;</a></span>
         {% else %}
-            <span class="p-disable">&gt;</span>
+            <span class="p-text">&gt;</span>
         {% endif %}
     </div>
 {% endif %}

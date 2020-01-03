@@ -3,7 +3,7 @@
 {% block body %}
     {% set is_empty = true %}
 
-    <a href="{{ path('cblog_admin') }}" class="btn btn-primary">{% trans from "user" %}back{% endtrans %}</a>
+    <a href="{{ path('cblog_admin') }}" class="btn btn-primary mb-3">{% trans from "user" %}back{% endtrans %}</a>
 
     {% include '/includes/content_handler.html.twig' with {
         'array': users,

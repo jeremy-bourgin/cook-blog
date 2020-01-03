@@ -1,3 +1,2 @@
-1. design (+ pagination)
-2. readme
-3. contenu
+1. readme
+2. contenu

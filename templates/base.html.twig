@@ -87,6 +87,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 							{% for l in global_langs %}
+								{# dans le cas où on tombe sur une page d'erreur (404), _route et _route_params sont potentiellement null #}
 								{% set lang_path = app.request.get('_route') %}
 								{% set lang_params = {'lang': l} %}
 

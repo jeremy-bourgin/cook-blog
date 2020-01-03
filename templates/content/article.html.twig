@@ -15,7 +15,7 @@
 	{% else %}
 		<article class="article">
 			<header class="mb-3"><h1>{{ article.title }}</h1></header>
-			<aside class="aside mb-2">
+			<aside class="aside mb-3">
 				{% trans with {'%date%': (article.time|localizeddate("short", "short")), '%user%': article.user.username} from 'content' %}article_header{% endtrans %}
 			</aside>
 			<div>
